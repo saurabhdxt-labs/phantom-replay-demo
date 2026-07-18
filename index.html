@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHANTOM — GPS Jamming Forecast, Proven Daily</title>
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="replay.css">
+</head>
+<body>
+
+<header class="topbar">
+  <span class="brand-mark" aria-hidden="true"></span>
+  <div class="brand-text">
+    <h1>PHANTOM <span class="dim">—</span> GPS Jamming Forecast, Proven Daily</h1>
+    <p class="tagline">Every point below was forecast 12 hours ahead, then verified
+      against what actually happened. Published with a 1-day lag.</p>
+  </div>
+  <div class="topbar-actions">
+    <button id="storyBtn" class="story-btn" type="button" disabled
+            aria-label="Start the guided story walkthrough">&#9656; Story mode</button>
+    <a class="contact-btn" href="mailto:saurabh.dxt@gmail.com?subject=PHANTOM%20%E2%80%94%20GPS%20jamming%20forecast"
+       aria-label="Contact about PHANTOM">Contact</a>
+  </div>
+</header>
+
+<div id="map" role="application" aria-label="Forecast replay map"></div>
+
+<aside class="legend" id="legend">
+  <div class="legend-title">Legend</div>
+  <div class="legend-row"><span class="swatch ramp"></span>
+    <span>Forecast risk, issued 12&nbsp;h ahead (0.5&nbsp;&rarr;&nbsp;1.0)</span></div>
+  <div class="legend-row"><span class="swatch ring"></span>
+    <span>Verified hit &mdash; interference observed where flagged</span></div>
+  <div class="legend-row"><span class="swatch dot-fa"></span>
+    <span>Flagged, nothing observed (false alarm &mdash; shown, not hidden)</span></div>
+  <div class="legend-row"><span class="swatch dot-miss"></span>
+    <span>Interference observed, not flagged (miss &mdash; shown, not hidden)</span></div>
+
+  <details class="howto">
+    <summary>How to read this</summary>
+    <p>Pick a day, press play. Each frame is one hour (UTC). Every colored
+    point is a place the system flagged as high risk <strong>12 hours before
+    that hour began</strong>. When the interference channel actually lit up
+    there, the point earns a pulsing ring &mdash; a verified call.</p>
+    <p>We show the whole record: false alarms stay on the map, and blue points
+    mark interference we did <em>not</em> flag. The precision figure in the
+    bar below is computed over every flagged point of the day &mdash; nothing
+    is cropped to flatter the score.</p>
+    <p>Positions are shown at ~110&nbsp;m display resolution. The published
+    file behind this page carries only what you see: position, risk, outcome.</p>
+    <p>Day precision here is computed at the 0.5 display threshold over every
+    call shown; the ledger precision figure in our documents is computed on
+    the gradeable forward record under its own pre-registered rules &mdash;
+    the two are different, deliberately conservative views of the same
+    forecasts.</p>
+  </details>
+</aside>
+
+<footer class="dock">
+  <div class="controls">
+    <label class="ctl-label" for="daySelect">Day</label>
+    <select id="daySelect" aria-label="Choose day"></select>
+    <button id="playBtn" class="play" aria-label="Play the 24 hours">&#9654; Play</button>
+    <input id="hourSlider" type="range" min="0" max="23" value="0" step="1"
+           aria-label="Hour of day">
+    <span id="hourLabel" class="hour-label">&mdash;</span>
+  </div>
+  <div class="stats" id="statsBar">
+    <span class="stat"><b id="stPrecision">&ndash;</b> day precision</span>
+    <span class="stat"><b id="stHits">&ndash;</b> verified hits</span>
+    <span class="stat"><b id="stHigh">&ndash;</b> high-risk calls</span>
+    <span class="stat"><b id="stMisses">&ndash;</b> misses</span>
+    <span class="stat hour-stat" id="stHour"></span>
+  </div>
+  <p class="anchor-line">Forecasts are committed to a Bitcoin-anchored record
+    BEFORE the target window &mdash; the timing is cryptographically anchored and
+    independently verifiable under NDA.</p>
+</footer>
+
+<div id="storyPanel" class="story-panel" hidden>
+  <div class="story-head">
+    <span id="storyCounter" class="story-counter"></span>
+    <span id="storyKind" class="story-kind"></span>
+  </div>
+  <p id="storyText" class="story-text"></p>
+  <div class="story-nav">
+    <button id="storyPrev" type="button">&#8592; Prev</button>
+    <button id="storyNext" type="button">Next &#8594;</button>
+    <button id="storyExit" type="button" class="story-exit">Exit</button>
+  </div>
+</div>
+
+<div id="msg" class="msg" hidden></div>
+
+<script src="vendor/leaflet.js"></script>
+<script src="vendor/land.js"></script>
+<script src="data/index.js"></script>
+<script src="replay.js"></script>
+</body>
+</html>

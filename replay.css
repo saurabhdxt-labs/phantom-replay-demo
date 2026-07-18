@@ -1,0 +1,409 @@
+/* PHANTOM replay demo — dark professional theme. Self-contained, no webfonts. */
+
+:root {
+  --bg: #0b0e14;
+  --panel: rgba(13, 18, 27, 0.92);
+  --panel-border: #1e2735;
+  --text: #dce5f1;
+  --muted: #8a99b0;
+  --accent: #64ffda;      /* verified-hit ring */
+  --risk-lo: #ffd166;     /* risk 0.5 */
+  --risk-hi: #e63946;     /* risk 1.0 */
+  --miss: #5b8db8;        /* observed, not flagged */
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font: 14px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+        Helvetica, Arial, sans-serif;
+}
+
+#map {
+  position: fixed;
+  inset: 0;
+  background: var(--bg);
+  z-index: 0;
+}
+
+/* ---- header ---- */
+
+.topbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 18px;
+  background: linear-gradient(180deg, rgba(11,14,20,0.96) 55%, rgba(11,14,20,0));
+  pointer-events: none;
+}
+
+.brand-mark {
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, var(--accent), #0f7d66 70%);
+  box-shadow: 0 0 14px rgba(100, 255, 218, 0.55);
+  flex: none;
+}
+
+.brand-text h1 {
+  margin: 0;
+  font-size: 17px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.brand-text .dim { color: var(--muted); font-weight: 400; }
+
+.tagline {
+  margin: 2px 0 0;
+  font-size: 12.5px;
+  color: var(--muted);
+  max-width: 720px;
+}
+
+/* ---- legend ---- */
+
+.legend {
+  position: fixed;
+  top: 76px; right: 14px;
+  z-index: 20;
+  width: 300px;
+  padding: 12px 14px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  backdrop-filter: blur(6px);
+  font-size: 12.5px;
+}
+
+.legend-title {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.legend-row {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 6px 0;
+  color: var(--text);
+}
+
+.swatch { width: 26px; height: 12px; flex: none; border-radius: 6px; }
+
+.swatch.ramp { background: linear-gradient(90deg, var(--risk-lo), var(--risk-hi)); }
+
+.swatch.ring {
+  width: 12px; height: 12px;
+  margin: 0 7px;
+  border-radius: 50%;
+  border: 2px solid var(--accent);
+  background: rgba(230, 57, 70, 0.8);
+  box-shadow: 0 0 8px rgba(100, 255, 218, 0.6);
+}
+
+.swatch.dot-fa {
+  width: 10px; height: 10px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background: #f0894f;
+}
+
+.swatch.dot-miss {
+  width: 10px; height: 10px;
+  margin: 0 8px;
+  border-radius: 50%;
+  background: var(--miss);
+}
+
+.howto { margin-top: 10px; border-top: 1px solid var(--panel-border); padding-top: 8px; }
+
+.howto summary {
+  cursor: pointer;
+  color: var(--accent);
+  font-weight: 600;
+  font-size: 12px;
+  outline: none;
+}
+
+.howto p { color: var(--muted); margin: 8px 0 0; }
+
+/* ---- bottom dock ---- */
+
+.dock {
+  position: fixed;
+  left: 50%;
+  bottom: 14px;
+  transform: translateX(-50%);
+  z-index: 20;
+  width: min(860px, calc(100vw - 24px));
+  padding: 12px 16px 9px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.ctl-label {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+select#daySelect {
+  background: #121826;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 7px;
+  padding: 6px 8px;
+  font-size: 13px;
+}
+
+button.play {
+  background: var(--accent);
+  color: #06281f;
+  font-weight: 700;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 14px;
+  font-size: 13px;
+  cursor: pointer;
+  min-width: 84px;
+}
+
+button.play:hover { filter: brightness(1.08); }
+
+input#hourSlider {
+  flex: 1;
+  accent-color: var(--accent);
+}
+
+.hour-label {
+  font-variant-numeric: tabular-nums;
+  font-size: 13px;
+  color: var(--text);
+  min-width: 120px;
+  text-align: right;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin-top: 9px;
+  font-size: 12.5px;
+  color: var(--muted);
+}
+
+.stats b {
+  color: var(--text);
+  font-size: 14px;
+  font-variant-numeric: tabular-nums;
+}
+
+.stat.hour-stat { margin-left: auto; color: var(--accent); }
+
+.anchor-line {
+  margin: 8px 0 0;
+  padding-top: 7px;
+  border-top: 1px solid var(--panel-border);
+  font-size: 11.5px;
+  color: var(--muted);
+}
+
+/* ---- story mode ---- */
+
+.topbar-actions {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: none;
+}
+
+.story-btn {
+  pointer-events: auto;
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 8px 16px;
+  font-size: 13px;
+  font-weight: 650;
+  cursor: pointer;
+  flex: none;
+}
+
+.story-btn:hover:not(:disabled) { background: rgba(100, 255, 218, 0.12); }
+
+/* Contact = the conversion action, so it's the filled/primary button. */
+.contact-btn {
+  pointer-events: auto;
+  background: var(--accent);
+  color: #041016;
+  border: 1px solid var(--accent);
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 750;
+  text-decoration: none;
+  white-space: nowrap;
+  flex: none;
+}
+
+.contact-btn:hover { filter: brightness(1.08); }
+
+.story-btn:disabled {
+  color: var(--muted);
+  border-color: var(--panel-border);
+  cursor: default;
+}
+
+body.story-on .controls,
+body.story-on .legend {
+  opacity: 0.35;
+  pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+
+.story-panel {
+  position: fixed;
+  left: 14px;
+  bottom: 170px;
+  z-index: 25;
+  width: 360px;
+  padding: 14px 16px;
+  background: var(--panel);
+  border: 1px solid var(--accent);
+  border-radius: 12px;
+  backdrop-filter: blur(6px);
+  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+}
+
+.story-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+.story-counter {
+  font-size: 11px;
+  font-weight: 650;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.story-kind {
+  font-size: 12px;
+  font-weight: 650;
+}
+
+.story-kind.is-hit { color: var(--accent); }
+
+.story-kind.is-miss { color: var(--miss); }
+
+.story-text {
+  margin: 0 0 12px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--text);
+  min-height: 66px;
+  cursor: pointer;
+}
+
+.story-text.beat-in { animation: beatIn 0.45s ease; }
+
+@keyframes beatIn {
+  from { opacity: 0; transform: translateY(5px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.story-nav {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.story-nav button {
+  background: #121826;
+  color: var(--text);
+  border: 1px solid var(--panel-border);
+  border-radius: 7px;
+  padding: 6px 12px;
+  font-size: 12.5px;
+  cursor: pointer;
+}
+
+.story-nav button:hover { border-color: var(--accent); color: var(--accent); }
+
+.story-nav .story-exit { margin-left: auto; }
+
+.voice-wrap {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  color: var(--muted);
+  cursor: pointer;
+}
+
+.voice-wrap input { accent-color: var(--accent); }
+
+@media (max-width: 720px) {
+  .story-panel { width: calc(100vw - 28px); bottom: 190px; }
+  .story-btn { padding: 7px 10px; }
+}
+
+/* ---- message overlay (no data / load failure) ---- */
+
+.msg {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 30;
+  padding: 18px 22px;
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 10px;
+  color: var(--text);
+  max-width: 460px;
+}
+
+/* ---- leaflet dark adjustments ---- */
+
+.leaflet-container { background: var(--bg); font: inherit; }
+
+.leaflet-top.leaflet-left { top: 68px; }   /* clear the header bar */
+
+.leaflet-bar a {
+  background: #121826;
+  color: var(--text);
+  border-bottom: 1px solid var(--panel-border);
+}
+
+.leaflet-bar a:hover { background: #1a2334; }
+
+@media (max-width: 720px) {
+  .legend { display: none; }
+  .hour-label { min-width: 90px; }
+}
