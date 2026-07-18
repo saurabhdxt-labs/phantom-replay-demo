@@ -33,8 +33,19 @@
     maxZoom: 10,
     worldCopyJump: true
   });
-  var HOME_BOUNDS = [[24, -12], [62, 58]];   // the covered theatres: Europe + Middle East
-  map.fitBounds(HOME_BOUNDS);
+  // The covered span: Western Europe -> Gulf -> India (multi-theatre, multi-continent).
+  var HOME_BOUNDS = [[15, -11], [66, 92]];
+  // Robust framing: fitBounds computed before the container has its final size
+  // zooms out to the whole world (the map read as "one area"). Recompute size
+  // first, and again after layout settles + on resize, so it always opens on the
+  // theatres. 2026-07-18.
+  function frameHome() {
+    map.invalidateSize(false);
+    map.fitBounds(HOME_BOUNDS, { padding: [8, 8] });
+  }
+  frameHome();
+  setTimeout(frameHome, 0);
+  window.addEventListener('resize', frameHome);
 
   if (window.__PHANTOM_LAND__) {
     L.geoJSON(window.__PHANTOM_LAND__, {
@@ -44,6 +55,21 @@
       }
     }).addTo(map);
   }
+
+  // Static theatre labels — public geography (Baltic, Gulf, ...), NOT the method
+  // (the binning scheme is not disclosed). Makes the coverage read as distinct
+  // named theatres across two continents rather than one blob.
+  var THEATRE_LABELS = [
+    ['Scandinavia', 62.5, 15], ['Baltic', 57.2, 22], ['Western Europe', 48.5, 2],
+    ['Black Sea', 44, 34], ['Eastern Med', 34.2, 31], ['Caucasus', 41.5, 44],
+    ['Persian Gulf', 26, 52], ['North India', 28, 78]
+  ];
+  THEATRE_LABELS.forEach(function (t) {
+    L.marker([t[1], t[2]], {
+      interactive: false, keyboard: false,
+      icon: L.divIcon({ className: 'theatre-label', html: t[0], iconSize: [0, 0] })
+    }).addTo(map);
+  });
 
   var pointsPane = L.canvas({ padding: 0.3 });
   var ringsPane = L.canvas({ padding: 0.3 });
