@@ -20,10 +20,44 @@
   <div class="topbar-actions">
     <button id="storyBtn" class="story-btn" type="button" disabled
             aria-label="Start the guided story walkthrough">&#9656; Story mode</button>
+    <button id="aboutBtn" class="about-btn" type="button"
+            aria-label="Learn more about PHANTOM">Learn more</button>
     <a class="contact-btn" href="mailto:saurabh.dxt@gmail.com?subject=PHANTOM%20%E2%80%94%20GPS%20jamming%20forecast"
        aria-label="Contact about PHANTOM">Contact</a>
   </div>
 </header>
+
+<!-- About overlay: capability-level only (no method) — numbers injected from
+     data/about.js (generated from the canonical snapshot, so they stay current). -->
+<div id="aboutOverlay" class="about-overlay" hidden>
+  <div class="about-card" role="dialog" aria-modal="true" aria-label="About PHANTOM">
+    <button id="aboutClose" class="about-close" type="button" aria-label="Close">&times;</button>
+    <h2>About PHANTOM</h2>
+    <p class="about-lede">A system that <b>forecasts GPS/GNSS interference 3&ndash;12&nbsp;hours before it happens</b> —
+      per area, refreshed hourly, across Europe, the Baltic, the Black Sea, the Gulf, and into South Asia.</p>
+
+    <div class="about-h">The proof</div>
+    <p>Every forecast is committed to a tamper-evident, Bitcoin-anchored record <b>before</b> its target
+      window opens, so the timing cannot be back-dated. Across a <b><span id="ab-days">&ndash;</span>-day</b>
+      live record: <b><span id="ab-hits">&ndash;</span> forward-proven hits</b> at
+      <b><span id="ab-prec">&ndash;</span>% precision</b> (<span id="ab-base">&ndash;</span>&times; the base rate),
+      catching <b>~<span id="ab-recall">&ndash;</span>%</b> of real interference in covered theatres
+      (<span id="ab-core">&ndash;</span> in the core).</p>
+
+    <div class="about-h">Honest scope</div>
+    <p>Coverage tracks where ADS-B is dense &mdash; roughly half of global interference today, extendable to
+      global with a global feed. Results are cross-checked against a third-party interference map and an
+      <b>independent aviation-authority NOTAM</b> record (a data lineage separate from the forecast's input).</p>
+
+    <div class="about-h">What you're evaluating</div>
+    <p>A pre-acquisition asset: a proven forecasting capability, patent-pending method, and an un-fakeable
+      timestamped track record &mdash; not a revenue stream. The full validation and the complete record are
+      available for independent verification under NDA.</p>
+
+    <a class="about-cta contact-btn" href="mailto:saurabh.dxt@gmail.com?subject=PHANTOM%20%E2%80%94%20request%20full%20validation"
+       aria-label="Contact for full validation">See the full validation &rarr; Contact</a>
+  </div>
+</div>
 
 <div id="map" role="application" aria-label="Forecast replay map"></div>
 
@@ -97,6 +131,7 @@
 <script src="vendor/leaflet.js"></script>
 <script src="vendor/land.js"></script>
 <script src="data/index.js"></script>
+<script src="data/about.js"></script>
 <script src="replay.js"></script>
 </body>
 </html>

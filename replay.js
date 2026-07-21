@@ -454,6 +454,27 @@
   $('storyPrev').addEventListener('click', prevBeat);
   $('storyText').addEventListener('click', nextBeat);
 
+  // ---- About overlay: fill capability numbers from data/about.js (generated
+  // from the canonical snapshot, so they never drift) and wire the toggle. ----
+  (function () {
+    var ab = window.__PHANTOM_ABOUT__ || {};
+    function set(id, v) { var el = $(id); if (el && v != null && v !== '') { el.textContent = v; } }
+    set('ab-days', ab.days);
+    set('ab-hits', ab.hits != null ? Number(ab.hits).toLocaleString() : null);
+    set('ab-prec', ab.precision);
+    set('ab-base', ab.base_mult);
+    set('ab-recall', ab.recall);
+    if (ab.core_lo != null && ab.core_hi != null) {
+      set('ab-core', ab.core_lo + '–' + ab.core_hi + '%');
+    }
+    var overlay = $('aboutOverlay');
+    function showAbout(v) { overlay.hidden = !v; }
+    $('aboutBtn').addEventListener('click', function () { showAbout(true); });
+    $('aboutClose').addEventListener('click', function () { showAbout(false); });
+    overlay.addEventListener('click', function (e) { if (e.target === overlay) { showAbout(false); } });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { showAbout(false); } });
+  })();
+
   var WEEKDAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   var MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
                 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
