@@ -454,6 +454,11 @@ body.story-on .theatre-label { display: none; }
   background: rgba(5, 7, 13, 0.72);
   backdrop-filter: blur(4px);
 }
+/* The `hidden` attribute MUST win over `display:flex`. Without this guard an
+   author `display` rule overrides the UA `[hidden]{display:none}`, so setting
+   overlay.hidden=true is a no-op: the panel opens but ×, backdrop-click and
+   Escape can never dismiss it (and it renders open on load). */
+.about-overlay[hidden] { display: none; }
 .about-card {
   position: relative;
   width: min(640px, 100%);
