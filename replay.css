@@ -277,10 +277,18 @@ input#hourSlider {
   cursor: default;
 }
 
-body.story-on .controls,
-body.story-on .legend {
+/* Story mode drives playback, so the bottom controls are disabled during it. */
+body.story-on .controls {
   opacity: 0.35;
   pointer-events: none;
+  transition: opacity 0.4s ease;
+}
+/* The legend stays INTERACTIVE during story mode (dimmed for focus, but you can
+   still open "How to read this"). Disabling it with pointer-events:none let the
+   map's grab cursor bleed through, so it looked clickable but wasn't — a trap on
+   a buyer-facing demo. */
+body.story-on .legend {
+  opacity: 0.55;
   transition: opacity 0.4s ease;
 }
 
