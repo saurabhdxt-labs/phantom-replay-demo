@@ -71,8 +71,16 @@
     }).addTo(map);
   });
 
-  var pointsPane = L.canvas({ padding: 0.3 });
-  var ringsPane = L.canvas({ padding: 0.3 });
+  // Points/rings MUST render above the land polygons. Land sits in the SVG
+  // overlayPane (z-index 400); a plain L.canvas() also lands in overlayPane and
+  // was rendering UNDER the land, so every marker over land was occluded — which
+  // hid the biggest inland jamming hotspot of all (Baltic / Kaliningrad). Give
+  // the canvas renderers dedicated panes above 400, but below the 600 markerPane
+  // so the theatre labels stay readable on top. (occlusion fix 2026-07-24)
+  map.createPane('phantomPoints'); map.getPane('phantomPoints').style.zIndex = 450;
+  map.createPane('phantomRings'); map.getPane('phantomRings').style.zIndex = 460;
+  var pointsPane = L.canvas({ pane: 'phantomPoints', padding: 0.3 });
+  var ringsPane = L.canvas({ pane: 'phantomRings', padding: 0.3 });
   var pointsLayer = L.layerGroup().addTo(map);
   var ringsLayer = L.layerGroup().addTo(map);
 
