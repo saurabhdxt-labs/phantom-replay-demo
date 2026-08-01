@@ -1,0 +1,144 @@
+{
+ "generated_utc": "2026-08-01T16:45:00.241591+00:00",
+ "status": "receipt",
+ "stages": {
+  "gps_notams": 18,
+  "with_parseable_start_radius": 8,
+  "with_provable_onset": 0,
+  "with_committed_forecast_before_start": 0,
+  "corroboration_fallback": 1
+ },
+ "receipt": {
+  "type": "corroboration",
+  "sources": {
+   "forecast_input": "aggregated navigation-integrity fields broadcast by aircraft over open ADS-B networks",
+   "oracle": "aviation-authority GPS-interference NOTAMs (public authority declarations), via a licensed aviation-data API",
+   "record": "public git repository, every forecast committed before its target window; commits anchored into Bitcoin via OpenTimestamps"
+  },
+  "verification": {
+   "repo_url": "https://github.com/saurabhdxt-labs/phantom-validator-public",
+   "commit_url": "https://github.com/saurabhdxt-labs/phantom-validator-public/commit/c971b3d960703ba686a897c03e6977146677fb88",
+   "file_url": "https://github.com/saurabhdxt-labs/phantom-validator-public/blob/c971b3d960703ba686a897c03e6977146677fb88/reports/forecast/2026-07-31/01_h12.parquet",
+   "notam_lookup": {
+    "service": "FAA NOTAM Search (public, free)",
+    "url": "https://notams.aim.faa.gov/notamSearch/",
+    "instructions": "search location EYVL, NOTAM A5014/26 \u2014 match the text shown here"
+   },
+   "commands": [
+    "git clone https://github.com/saurabhdxt-labs/phantom-validator-public",
+    "git log --format='%H %cI' --diff-filter=A -- reports/forecast/2026-07-31/01_h12.parquet",
+    "#   -> c971b3d96070 2026-07-31T01:25:44+00:00  (before the 13:00 UTC window)",
+    "python -c \"import pandas as p; d=p.read_parquet('reports/forecast/2026-07-31/01_h12.parquet'); print(d[d.probability>=0.7])\"",
+    "# commit time alone is self-settable; the binding bound is the Bitcoin block in the OpenTimestamps proof"
+   ]
+  },
+  "notam": {
+   "id": "16168196",
+   "official_number": "A5014/26",
+   "issuing_office": "EYVN",
+   "fir": "EYVL",
+   "center_lat": 55.7666666061,
+   "center_lng": 22.4833332561,
+   "radius_nm": 155.0,
+   "start_utc": "2026-07-29T05:10:00+00:00",
+   "end_utc": "2026-10-30T21:00:00+00:00",
+   "text_excerpt": "PRECAUTION-GNSS SIGNAL JAMMING AND SPOOFING CAN BE  EXPECTED IN\nVILNIUS FIR  MOSTLY IN WESTERN AND SOUTHERN PARTS. CONVENTIONAL\nNAV AIDS AVAILABLE  AND MAY BE USED AS RECOMENDED  IN EASA  SIB\n2022-02R4. AIR  CREW  ARE AS"
+  },
+  "standing_declaration": {
+   "archived_day": "2026-07-31",
+   "note": "the authority declaration was ALREADY ACTIVE at commit time (standing NOTAM). This receipt proves the forecast was committed hours before its target window and that an independent authority declaration covered the same area at that window \u2014 it does NOT claim the declaration was predicted."
+  },
+  "forecast": {
+   "commit_sha": "c971b3d960703ba686a897c03e6977146677fb88",
+   "commit_time_utc": "2026-07-31T01:25:44+00:00",
+   "file": "reports/forecast/2026-07-31/01_h12.parquet",
+   "n_matching_rows": 9,
+   "rows": [
+    {
+     "lat": 54.3892,
+     "lng": 23.0888,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.876,
+     "dist_nm": 85.3
+    },
+    {
+     "lat": 54.3571,
+     "lng": 23.0121,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.842,
+     "dist_nm": 86.6
+    },
+    {
+     "lat": 54.4757,
+     "lng": 22.9647,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.855,
+     "dist_nm": 79.3
+    },
+    {
+     "lat": 54.4057,
+     "lng": 23.1086,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.877,
+     "dist_nm": 84.5
+    },
+    {
+     "lat": 54.2761,
+     "lng": 22.8394,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.878,
+     "dist_nm": 90.3
+    },
+    {
+     "lat": 54.2891,
+     "lng": 23.0444,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.876,
+     "dist_nm": 90.8
+    },
+    {
+     "lat": 54.2554,
+     "lng": 23.042,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.875,
+     "dist_nm": 92.8
+    },
+    {
+     "lat": 54.5063,
+     "lng": 23.1159,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.877,
+     "dist_nm": 78.7
+    },
+    {
+     "lat": 54.5391,
+     "lng": 23.1555,
+     "target_utc": "2026-07-31T13:00:00+00:00",
+     "horizon_h": 12,
+     "probability": 0.877,
+     "dist_nm": 77.2
+    }
+   ]
+  },
+  "lead_hours": 11.6,
+  "lead_basis": "commit_to_target_hour",
+  "bitcoin": {
+   "per_commit_stamp": true,
+   "head_stamps_after_commit": 2,
+   "status": "per-commit OpenTimestamps stamp on disk; ancestry anchored by 2 daily HEAD stamp(s) with Bitcoin attestation"
+  },
+  "honesty": {
+   "claim": "one high-confidence forecast was committed hours before its target window; at that window the same area was covered by an independent authority GPS-interference declaration",
+   "not_claim": "prediction of the declaration itself (it was standing), or per-event skill",
+   "statistical_proof": "the aggregate NOTAM oracle ledger: the model beats a climatology baseline on day-checks vs authority-declared cells (counts in sales/BUYER_FAQ.md \u2014 quote those, not this single example)"
+  }
+ }
+}

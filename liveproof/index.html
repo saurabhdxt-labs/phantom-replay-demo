@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHANTOM — Forecast Receipt</title>
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="receipt.css">
+</head>
+<body>
+<header>
+  <div class="brand">PHANTOM</div>
+  <div class="title">Forecast receipt <span id="type-badge" class="badge"></span></div>
+  <div class="stamp" id="generated"></div>
+</header>
+
+<main id="main" hidden>
+  <!-- The three-step flow: committed -> window -> authority declaration -->
+  <section class="flow">
+    <div class="step" id="step-commit">
+      <div class="step-k">1 · COMMITTED &amp; ANCHORED</div>
+      <div class="step-big" id="commit-time"></div>
+      <div class="step-sub">git commit <code id="commit-sha"></code></div>
+      <div class="step-sub" id="bitcoin-line"></div>
+    </div>
+    <div class="arrow"><div class="lead" id="lead-hours"></div><div class="lead-sub" id="lead-basis"></div></div>
+    <div class="step" id="step-target">
+      <div class="step-k">2 · TARGET WINDOW</div>
+      <div class="step-big" id="target-time"></div>
+      <div class="step-sub" id="rows-line"></div>
+    </div>
+    <div class="arrow eq"></div>
+    <div class="step" id="step-notam">
+      <div class="step-k">3 · AUTHORITY DECLARATION</div>
+      <div class="step-big" id="notam-id"></div>
+      <div class="step-sub" id="notam-window"></div>
+    </div>
+  </section>
+
+  <section class="body">
+    <div id="map"></div>
+    <aside class="panel">
+      <div class="notam-text">
+        <div class="panel-k">NOTAM text (authority-published)</div>
+        <blockquote id="notam-text"></blockquote>
+      </div>
+      <div class="panel-k">Verification trail</div>
+      <pre id="verify-trail" class="trail"></pre>
+      <div class="panel-k">Verify it yourself — links &amp; commands</div>
+      <ul id="verify-links" class="sources"></ul>
+      <pre id="verify-cmds" class="trail"></pre>
+      <div class="panel-k">Sources</div>
+      <ul id="sources" class="sources"></ul>
+    </aside>
+  </section>
+
+  <section class="honesty">
+    <div><span class="h-k">This shows:</span> <span id="h-claim"></span></div>
+    <div><span class="h-k">This does not show:</span> <span id="h-notclaim"></span></div>
+    <div><span class="h-k">The statistical proof is:</span> <span id="h-stat"></span></div>
+    <div id="standing-note" class="standing" hidden></div>
+  </section>
+</main>
+
+<main id="empty" hidden>
+  <section class="none">
+    <h2>No receipt available</h2>
+    <p>No NOTAM in the current active set survives the full evidence chain.
+       This page refuses to show anything that is not provable end-to-end.</p>
+    <pre id="stages"></pre>
+  </section>
+</main>
+
+<script src="vendor/leaflet.js"></script>
+<script src="vendor/land.js"></script>
+<script src="receipt.js"></script>
+</body>
+</html>
