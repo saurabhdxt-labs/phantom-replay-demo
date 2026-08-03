@@ -23,6 +23,8 @@
       el('stages').textContent = String(e);
     });
 
+  var activeMap = null;
+
   function render(doc) {
     el('generated').textContent = 'generated ' + fmtUtc(doc.generated_utc);
     if (doc.status !== 'receipt') {
@@ -31,8 +33,37 @@
         '\n' + (doc.note || '');
       return;
     }
-    var r = doc.receipt, n = r.notam, f = r.forecast;
     show('main');
+    var receipts = doc.receipts || [doc.receipt];
+    if (receipts.length > 1) {
+      var tabs = el('example-tabs');
+      tabs.hidden = false;
+      receipts.forEach(function (rc, i) {
+        var b = document.createElement('button');
+        b.textContent = 'Example ' + (i + 1) + ' — ' +
+          (rc.notam.official_number || rc.notam.id) + ' · ' + rc.notam.fir;
+        if (i === 0) b.classList.add('active');
+        b.addEventListener('click', function () {
+          tabs.querySelectorAll('button').forEach(function (x) {
+            x.classList.remove('active');
+          });
+          b.classList.add('active');
+          renderReceipt(receipts[i]);
+        });
+        tabs.appendChild(b);
+      });
+    }
+    renderReceipt(receipts[0]);
+  }
+
+  function renderReceipt(r) {
+    var n = r.notam, f = r.forecast;
+    // reset per-example dynamic regions (switcher re-renders in place)
+    el('sources').textContent = '';
+    el('verify-links').textContent = '';
+    el('standing-note').hidden = true;
+    el('type-badge').classList.remove('corroboration');
+    if (activeMap) { activeMap.remove(); activeMap = null; }
 
     // type badge
     var badge = el('type-badge');
@@ -158,6 +189,7 @@
     // (caught in the 2026-08-01 headless render test).
     var map = L.map('map', { zoomControl: true, attributionControl: false })
       .setView([n.center_lat, n.center_lng], 6);
+    activeMap = map;
     if (window.__PHANTOM_LAND__) {
       L.geoJSON(window.__PHANTOM_LAND__, {
         style: { color: '#232b3a', weight: 0.7, fillColor: '#141a26',

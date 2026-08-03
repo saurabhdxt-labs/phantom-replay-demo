@@ -1,1 +1,1 @@
-window.__PHANTOM_ABOUT__ = {"days": 65, "hits": 33429, "precision": 54, "base_mult": 5.1, "recall": 65, "core_lo": 74, "core_hi": 97};
+window.__PHANTOM_ABOUT__ = {"days": 66, "hits": 33429, "precision": 54, "base_mult": 5.1, "recall": 64, "core_lo": 74, "core_hi": 97};

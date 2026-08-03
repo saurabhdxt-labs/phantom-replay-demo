@@ -22,6 +22,21 @@ header {
 .badge.corroboration { background: #2c2714; color: #e9c46a; border-color: #5c5124; }
 .stamp { margin-left: auto; color: #6b7789; font-size: 12px; }
 
+.tabs {
+  display: flex; gap: 8px; padding: 14px 20px 0; flex-wrap: wrap;
+}
+.tabs button {
+  background: #111726; color: #97a3b7; border: 1px solid #1e2739;
+  border-radius: 6px; padding: 7px 14px; font: inherit; font-size: 12.5px;
+  cursor: pointer;
+}
+.tabs button:hover { color: #dbe2ee; }
+.tabs button.active {
+  background: #16233c; color: #f2f6fc; border-color: #6ea8ff;
+  font-weight: 600;
+}
+.tabs button:focus-visible { outline: 2px solid #6ea8ff; }
+
 .flow {
   display: flex; align-items: stretch; gap: 10px;
   padding: 18px 20px 6px;
