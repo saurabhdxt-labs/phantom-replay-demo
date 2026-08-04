@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PHANTOM — Proof Walk</title>
+<link rel="stylesheet" href="vendor/leaflet.css">
+<link rel="stylesheet" href="walk.css">
+</head>
+<body>
+<header>
+  <div class="brand">PHANTOM</div>
+  <div class="title">Proof walk — one forecast, start to finish</div>
+  <nav id="cases" class="cases"></nav>
+</header>
+
+<div id="map"></div>
+
+<section class="stepbar">
+  <button id="prev" class="navbtn" aria-label="Previous step">← Prev</button>
+  <div class="stepcard">
+    <div class="step-eyebrow"><span id="step-label"></span><span class="dots" id="dots"></span></div>
+    <h2 id="step-title"></h2>
+    <div id="btc-line" class="btc" hidden></div>
+    <div id="ctx-line" class="ctx" hidden></div>
+    <p id="step-body"></p>
+    <div id="step-links" class="links"></div>
+  </div>
+  <button id="next" class="navbtn primary" aria-label="Next step">Next →</button>
+</section>
+
+<script src="vendor/leaflet.js"></script>
+<script src="vendor/land.js"></script>
+<script src="walk.js"></script>
+</body>
+</html>

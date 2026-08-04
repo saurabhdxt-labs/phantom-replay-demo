@@ -1,0 +1,92 @@
+/* PHANTOM proof walk — full-bleed map, one big step card, Next drives it. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { height: 100%; }
+body {
+  background: #0b0f17; color: #dbe2ee; overflow: hidden;
+  font: 15px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, sans-serif;
+  display: flex; flex-direction: column;
+}
+
+header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 20px; border-bottom: 1px solid #1c2433; z-index: 20;
+}
+.brand { font-weight: 700; letter-spacing: 3px; color: #6ea8ff; }
+.title { font-size: 14px; color: #97a3b7; }
+.cases { margin-left: auto; display: flex; gap: 8px; flex-wrap: wrap; }
+.cases button {
+  background: #111726; color: #97a3b7; border: 1px solid #1e2739;
+  border-radius: 6px; padding: 6px 12px; font: inherit; font-size: 12px;
+  cursor: pointer;
+}
+.cases button.active { background: #16233c; color: #f2f6fc; border-color: #6ea8ff; font-weight: 600; }
+.cases button:focus-visible { outline: 2px solid #6ea8ff; }
+
+#map { flex: 1; background: #0d1420; }
+.leaflet-container { background: #0d1420; }
+
+.stepbar {
+  position: relative; z-index: 20;
+  display: flex; align-items: stretch; gap: 12px;
+  padding: 14px 20px 18px; border-top: 1px solid #1c2433; background: #0b0f17;
+}
+.stepcard { flex: 1; max-width: 860px; margin: 0 auto; }
+.step-eyebrow {
+  display: flex; align-items: center; gap: 12px;
+  font-size: 10.5px; letter-spacing: 1.8px; color: #6ea8ff; font-weight: 700;
+  text-transform: uppercase; margin-bottom: 4px;
+}
+.dots { letter-spacing: 4px; color: #3a4660; font-size: 13px; }
+.dots b { color: #6ea8ff; }
+h2 { font-size: 20px; color: #f2f6fc; margin-bottom: 4px; text-wrap: balance; }
+#step-body { font-size: 14px; color: #aeb9cb; max-width: 78ch; }
+.btc {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #2c2714; color: #e9c46a; border: 1px solid #5c5124;
+  border-radius: 6px; padding: 6px 12px; margin: 4px 0 6px;
+  font-size: 13px; font-weight: 600;
+}
+.btc::before { content: "⛓"; }
+.btc[hidden] { display: none; }
+.ctx {
+  display: block; background: #131b2b; color: #9fb4d8;
+  border: 1px solid #27355c; border-left: 3px solid #6ea8ff;
+  border-radius: 6px; padding: 7px 12px; margin: 4px 0 6px;
+  font-size: 12.5px; max-width: 78ch;
+}
+.ctx[hidden] { display: none; }
+.ctx b { color: #dbe2ee; }
+.btc a { color: #ffd479; text-decoration: underline; }
+.links { margin-top: 8px; display: flex; gap: 14px; flex-wrap: wrap; }
+.links a {
+  color: #6ea8ff; text-decoration: none; font-size: 13px;
+  border: 1px solid #1e2739; background: #111726;
+  padding: 5px 10px; border-radius: 5px;
+}
+.links a:hover { border-color: #6ea8ff; }
+.links .plain { border: 0; background: none; padding: 5px 0; color: #7d8aa0; font-size: 12.5px; }
+
+.navbtn {
+  align-self: center; background: #111726; color: #97a3b7;
+  border: 1px solid #1e2739; border-radius: 8px; padding: 14px 20px;
+  font: inherit; font-size: 14px; cursor: pointer; white-space: nowrap;
+}
+.navbtn.primary { background: #1d4ed8; border-color: #1d4ed8; color: #fff; font-weight: 650; }
+.navbtn.primary:hover { background: #2563eb; }
+.navbtn:disabled { opacity: .35; cursor: default; }
+.navbtn:focus-visible { outline: 2px solid #6ea8ff; }
+
+.cell-tip { font-size: 12px; }
+.notam-card {
+  font-size: 12px; line-height: 1.5; max-width: 300px; white-space: pre-wrap;
+}
+.city-tip {
+  background: none; border: none; box-shadow: none;
+  color: #55627a; font-size: 10.5px; letter-spacing: .5px; padding: 0;
+}
+.city-tip::before { display: none; }
+.place-tag {
+  background: rgba(17,23,38,.9); border: 1px solid #2c3648; box-shadow: none;
+  color: #9fb4d8; font-size: 12.5px; font-weight: 600; letter-spacing: .4px;
+  border-radius: 5px; padding: 3px 9px;
+}
