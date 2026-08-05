@@ -1,9 +1,9 @@
 {
- "generated_utc": "2026-08-04T13:09:10.181799+00:00",
+ "generated_utc": "2026-08-05T12:19:19.088121+00:00",
  "status": "receipt",
  "stages": {
-  "gps_notams": 14,
-  "with_parseable_start_radius": 9,
+  "gps_notams": 17,
+  "with_parseable_start_radius": 8,
   "with_provable_onset": 0,
   "with_committed_forecast_before_start": 0,
   "corroboration_examples": 4,
@@ -24,214 +24,223 @@
   },
   "verification": {
    "repo_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror",
-   "commit_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/commit/8701a5968495a29071b5589cf1479f8f0661e645",
-   "file_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/blob/8701a5968495a29071b5589cf1479f8f0661e645/reports/forecast/2026-08-02/10_h3.parquet",
+   "commit_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/commit/73519b8f300c961d0f5c714942bb8ee3676d35e8",
+   "file_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/blob/73519b8f300c961d0f5c714942bb8ee3676d35e8/reports/forecast/2026-08-04/11_h6.parquet",
    "notam_lookup": {
     "service": "FAA NOTAM Search (public, free)",
     "url": "https://notams.aim.faa.gov/notamSearch/",
-    "instructions": "search location EYVL, NOTAM A5014/26 \u2014 match the text shown here"
+    "instructions": "search location EVRR, NOTAM A3951/26 \u2014 match the text shown here"
    },
    "commands": [
     "git clone https://github.com/saurabhdxt-labs/phantom-record-mirror",
-    "git log --format='%H %cI' --diff-filter=A -- reports/forecast/2026-08-02/10_h3.parquet",
-    "#   -> 8701a5968495 2026-08-02T11:40:00+00:00  (before the 13:00 UTC window)",
-    "python -c \"import pandas as p; d=p.read_parquet('reports/forecast/2026-08-02/10_h3.parquet'); print(d[d.probability>=0.7])\"",
+    "git log --format='%H %cI' --diff-filter=A -- reports/forecast/2026-08-04/11_h6.parquet",
+    "#   -> 73519b8f300c 2026-08-04T12:40:06+00:00  (before the 17:00 UTC window)",
+    "python -c \"import pandas as p; d=p.read_parquet('reports/forecast/2026-08-04/11_h6.parquet'); print(d[d.probability>=0.7])\"",
     "# commit time alone is self-settable; the binding bound is the Bitcoin block in the OpenTimestamps proof"
    ]
   },
   "notam": {
-   "id": "16168196",
-   "official_number": "A5014/26",
-   "issuing_office": "EYVN",
-   "fir": "EYVL",
-   "fir_name": "Vilnius FIR \u00b7 Lithuania",
-   "center_lat": 55.7666666061,
-   "center_lng": 22.4833332561,
-   "radius_nm": 155.0,
-   "start_utc": "2026-07-29T05:10:00+00:00",
-   "end_utc": "2026-10-30T21:00:00+00:00",
-   "text_excerpt": "PRECAUTION-GNSS SIGNAL JAMMING AND SPOOFING CAN BE  EXPECTED IN\nVILNIUS FIR  MOSTLY IN WESTERN AND SOUTHERN PARTS. CONVENTIONAL\nNAV AIDS AVAILABLE  AND MAY BE USED AS RECOMENDED  IN EASA  SIB\n2022-02R4. AIR  CREW  ARE AS"
+   "id": "16127521",
+   "official_number": "A3951/26",
+   "issuing_office": "EVRA",
+   "fir": "EVRR",
+   "fir_name": "Riga FIR \u00b7 Latvia",
+   "center_lat": 56.399999940767884,
+   "center_lng": 23.383333319798112,
+   "radius_nm": 165.0,
+   "start_utc": "2026-07-20T14:40:00+00:00",
+   "end_utc": "2026-10-20T12:00:00+00:00",
+   "text_excerpt": "PRECAUTION GNSS SIGNAL INTERFERENCE CAN BE EXPECTED AND MAY \nRESULT IN UNRELIABLE OR UNAVAILABLE GPS SIGNALS WITHIN RIGA FIR. \nCONVENTIONAL NAV AIDS AVAILABLE AND MAY BE USED AS RECOMMENDED IN \nEASA SIB 2022-02R3 \n\nPOSSI"
   },
   "standing_declaration": {
-   "archived_day": "2026-08-02",
+   "archived_day": "2026-08-04",
    "note": "the authority declaration was ALREADY ACTIVE at commit time (standing NOTAM) \u2014 stated up front, not discovered. It is a blanket area warning with no end date; it cannot say which cells or which hour. The model never reads NOTAMs (they are used only to grade it). This receipt shows the model's own call \u2014 specific cells, a specific hour, committed before the window \u2014 inside an area the authority had flagged. It does NOT claim the declaration was predicted."
   },
   "forecast": {
-   "commit_sha": "8701a5968495a29071b5589cf1479f8f0661e645",
-   "commit_time_utc": "2026-08-02T11:40:00+00:00",
-   "file": "reports/forecast/2026-08-02/10_h3.parquet",
-   "n_matching_rows": 18,
+   "commit_sha": "73519b8f300c961d0f5c714942bb8ee3676d35e8",
+   "commit_time_utc": "2026-08-04T12:40:06+00:00",
+   "file": "reports/forecast/2026-08-04/11_h6.parquet",
+   "n_matching_rows": 19,
    "rows": [
     {
-     "lat": 54.1206,
-     "lng": 19.428,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.892,
-     "dist_nm": 144.4,
+     "lat": 55.4284,
+     "lng": 21.1066,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.882,
+     "dist_nm": 96.3,
      "outcome": "hit"
     },
     {
-     "lat": 54.1209,
-     "lng": 19.4649,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
+     "lat": 55.3298,
+     "lng": 20.5749,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.9,
+     "dist_nm": 114.4,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.3463,
+     "lng": 20.5566,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.907,
+     "dist_nm": 114.3,
+     "outcome": "hit"
+    },
+    {
+     "lat": 55.3793,
+     "lng": 20.5577,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.909,
+     "dist_nm": 113.2,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.3628,
+     "lng": 20.5383,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.897,
+     "dist_nm": 114.3,
+     "outcome": "hit"
+    },
+    {
+     "lat": 55.3958,
+     "lng": 20.5394,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.905,
+     "dist_nm": 113.1,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.3296,
+     "lng": 20.9517,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.873,
+     "dist_nm": 104.1,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.5607,
+     "lng": 20.5449,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.907,
+     "dist_nm": 107.8,
+     "outcome": "hit"
+    },
+    {
+     "lat": 55.5936,
+     "lng": 20.546,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.889,
+     "dist_nm": 106.9,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.6265,
+     "lng": 20.5471,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.836,
+     "dist_nm": 105.9,
+     "outcome": "hit"
+    },
+    {
+     "lat": 55.61,
+     "lng": 20.5276,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.831,
+     "dist_nm": 106.9,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.4783,
+     "lng": 20.561,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.904,
+     "dist_nm": 109.8,
+     "outcome": "hit"
+    },
+    {
+     "lat": 55.4948,
+     "lng": 20.5427,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.907,
+     "dist_nm": 109.9,
+     "outcome": "hit"
+    },
+    {
+     "lat": 55.4288,
+     "lng": 20.5405,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.905,
+     "dist_nm": 112.0,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.4289,
+     "lng": 20.5782,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
      "probability": 0.898,
-     "dist_nm": 143.5,
+     "dist_nm": 110.9,
      "outcome": "hit"
     },
     {
-     "lat": 54.1373,
-     "lng": 19.4098,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.91,
-     "dist_nm": 144.2,
+     "lat": 55.4123,
+     "lng": 20.5588,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.909,
+     "dist_nm": 112.0,
      "outcome": "hit"
     },
     {
-     "lat": 54.1376,
-     "lng": 19.4467,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.912,
-     "dist_nm": 143.3,
-     "outcome": "hit"
-    },
-    {
-     "lat": 54.1202,
-     "lng": 19.3911,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.893,
-     "dist_nm": 145.4,
-     "outcome": "hit"
-    },
-    {
-     "lat": 54.1031,
-     "lng": 19.3725,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.871,
-     "dist_nm": 146.6,
-     "outcome": "miss"
-    },
-    {
-     "lat": 54.0892,
-     "lng": 19.6858,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.848,
-     "dist_nm": 139.5,
-     "outcome": "ungraded"
-    },
-    {
-     "lat": 54.1527,
-     "lng": 19.2808,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.829,
-     "dist_nm": 146.9,
-     "outcome": "ungraded"
-    },
-    {
-     "lat": 54.1365,
-     "lng": 19.336,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.825,
-     "dist_nm": 146.1,
-     "outcome": "hit"
-    },
-    {
-     "lat": 54.1369,
-     "lng": 19.3729,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
+     "lat": 55.4453,
+     "lng": 20.5222,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
      "probability": 0.895,
-     "dist_nm": 145.2,
+     "dist_nm": 112.0,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.4453,
+     "lng": 20.5599,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.909,
+     "dist_nm": 110.9,
+     "outcome": "ungraded"
+    },
+    {
+     "lat": 55.5277,
+     "lng": 20.5438,
+     "target_utc": "2026-08-04T17:00:00+00:00",
+     "horizon_h": 6,
+     "probability": 0.911,
+     "dist_nm": 108.8,
      "outcome": "hit"
-    },
-    {
-     "lat": 54.1198,
-     "lng": 19.3542,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.894,
-     "dist_nm": 146.3,
-     "outcome": "ungraded"
-    },
-    {
-     "lat": 54.1531,
-     "lng": 19.3178,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.887,
-     "dist_nm": 145.9,
-     "outcome": "hit"
-    },
-    {
-     "lat": 54.1856,
-     "lng": 19.2074,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.702,
-     "dist_nm": 147.5,
-     "outcome": "ungraded"
-    },
-    {
-     "lat": 54.186,
-     "lng": 19.2443,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.834,
-     "dist_nm": 146.5,
-     "outcome": "hit"
-    },
-    {
-     "lat": 54.1734,
-     "lng": 19.6688,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.853,
-     "dist_nm": 136.2,
-     "outcome": "ungraded"
-    },
-    {
-     "lat": 54.1901,
-     "lng": 19.6507,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.824,
-     "dist_nm": 135.9,
-     "outcome": "ungraded"
-    },
-    {
-     "lat": 54.138,
-     "lng": 19.4836,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.887,
-     "dist_nm": 142.3,
-     "outcome": "hit"
-    },
-    {
-     "lat": 54.2071,
-     "lng": 19.6694,
-     "target_utc": "2026-08-02T13:00:00+00:00",
-     "horizon_h": 3,
-     "probability": 0.844,
-     "dist_nm": 134.8,
-     "outcome": "ungraded"
     }
    ]
   },
-  "lead_hours": 1.3,
+  "lead_hours": 4.3,
   "lead_basis": "commit_to_target_hour",
   "bitcoin": {
    "per_commit_stamp": false,
-   "head_stamps_after_commit": 2,
-   "status": "ancestry anchored by 2 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
+   "head_stamps_after_commit": 1,
+   "status": "ancestry anchored by 1 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
   },
   "honesty": {
    "claim": "one high-confidence forecast was committed hours before its target window; at that window the same area was covered by an independent authority GPS-interference declaration",
@@ -240,6 +249,239 @@
   }
  },
  "receipts": [
+  {
+   "type": "corroboration",
+   "sources": {
+    "forecast_input": "aggregated navigation-integrity fields broadcast by aircraft over open ADS-B networks",
+    "oracle": "aviation-authority GPS-interference NOTAMs (public authority declarations), via a licensed aviation-data API",
+    "record": "public git repository, every forecast committed before its target window; commits anchored into Bitcoin via OpenTimestamps"
+   },
+   "verification": {
+    "repo_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror",
+    "commit_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/commit/73519b8f300c961d0f5c714942bb8ee3676d35e8",
+    "file_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/blob/73519b8f300c961d0f5c714942bb8ee3676d35e8/reports/forecast/2026-08-04/11_h6.parquet",
+    "notam_lookup": {
+     "service": "FAA NOTAM Search (public, free)",
+     "url": "https://notams.aim.faa.gov/notamSearch/",
+     "instructions": "search location EVRR, NOTAM A3951/26 \u2014 match the text shown here"
+    },
+    "commands": [
+     "git clone https://github.com/saurabhdxt-labs/phantom-record-mirror",
+     "git log --format='%H %cI' --diff-filter=A -- reports/forecast/2026-08-04/11_h6.parquet",
+     "#   -> 73519b8f300c 2026-08-04T12:40:06+00:00  (before the 17:00 UTC window)",
+     "python -c \"import pandas as p; d=p.read_parquet('reports/forecast/2026-08-04/11_h6.parquet'); print(d[d.probability>=0.7])\"",
+     "# commit time alone is self-settable; the binding bound is the Bitcoin block in the OpenTimestamps proof"
+    ]
+   },
+   "notam": {
+    "id": "16127521",
+    "official_number": "A3951/26",
+    "issuing_office": "EVRA",
+    "fir": "EVRR",
+    "fir_name": "Riga FIR \u00b7 Latvia",
+    "center_lat": 56.399999940767884,
+    "center_lng": 23.383333319798112,
+    "radius_nm": 165.0,
+    "start_utc": "2026-07-20T14:40:00+00:00",
+    "end_utc": "2026-10-20T12:00:00+00:00",
+    "text_excerpt": "PRECAUTION GNSS SIGNAL INTERFERENCE CAN BE EXPECTED AND MAY \nRESULT IN UNRELIABLE OR UNAVAILABLE GPS SIGNALS WITHIN RIGA FIR. \nCONVENTIONAL NAV AIDS AVAILABLE AND MAY BE USED AS RECOMMENDED IN \nEASA SIB 2022-02R3 \n\nPOSSI"
+   },
+   "standing_declaration": {
+    "archived_day": "2026-08-04",
+    "note": "the authority declaration was ALREADY ACTIVE at commit time (standing NOTAM) \u2014 stated up front, not discovered. It is a blanket area warning with no end date; it cannot say which cells or which hour. The model never reads NOTAMs (they are used only to grade it). This receipt shows the model's own call \u2014 specific cells, a specific hour, committed before the window \u2014 inside an area the authority had flagged. It does NOT claim the declaration was predicted."
+   },
+   "forecast": {
+    "commit_sha": "73519b8f300c961d0f5c714942bb8ee3676d35e8",
+    "commit_time_utc": "2026-08-04T12:40:06+00:00",
+    "file": "reports/forecast/2026-08-04/11_h6.parquet",
+    "n_matching_rows": 19,
+    "rows": [
+     {
+      "lat": 55.4284,
+      "lng": 21.1066,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.882,
+      "dist_nm": 96.3,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.3298,
+      "lng": 20.5749,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.9,
+      "dist_nm": 114.4,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.3463,
+      "lng": 20.5566,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.907,
+      "dist_nm": 114.3,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.3793,
+      "lng": 20.5577,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.909,
+      "dist_nm": 113.2,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.3628,
+      "lng": 20.5383,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.897,
+      "dist_nm": 114.3,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.3958,
+      "lng": 20.5394,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.905,
+      "dist_nm": 113.1,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.3296,
+      "lng": 20.9517,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.873,
+      "dist_nm": 104.1,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.5607,
+      "lng": 20.5449,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.907,
+      "dist_nm": 107.8,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.5936,
+      "lng": 20.546,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.889,
+      "dist_nm": 106.9,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.6265,
+      "lng": 20.5471,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.836,
+      "dist_nm": 105.9,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.61,
+      "lng": 20.5276,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.831,
+      "dist_nm": 106.9,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.4783,
+      "lng": 20.561,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.904,
+      "dist_nm": 109.8,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.4948,
+      "lng": 20.5427,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.907,
+      "dist_nm": 109.9,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.4288,
+      "lng": 20.5405,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.905,
+      "dist_nm": 112.0,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.4289,
+      "lng": 20.5782,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.898,
+      "dist_nm": 110.9,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.4123,
+      "lng": 20.5588,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.909,
+      "dist_nm": 112.0,
+      "outcome": "hit"
+     },
+     {
+      "lat": 55.4453,
+      "lng": 20.5222,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.895,
+      "dist_nm": 112.0,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.4453,
+      "lng": 20.5599,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.909,
+      "dist_nm": 110.9,
+      "outcome": "ungraded"
+     },
+     {
+      "lat": 55.5277,
+      "lng": 20.5438,
+      "target_utc": "2026-08-04T17:00:00+00:00",
+      "horizon_h": 6,
+      "probability": 0.911,
+      "dist_nm": 108.8,
+      "outcome": "hit"
+     }
+    ]
+   },
+   "lead_hours": 4.3,
+   "lead_basis": "commit_to_target_hour",
+   "bitcoin": {
+    "per_commit_stamp": false,
+    "head_stamps_after_commit": 1,
+    "status": "ancestry anchored by 1 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
+   },
+   "honesty": {
+    "claim": "one high-confidence forecast was committed hours before its target window; at that window the same area was covered by an independent authority GPS-interference declaration",
+    "not_claim": "prediction of the declaration itself (it was standing), or per-event skill",
+    "statistical_proof": "the aggregate NOTAM oracle ledger: the model beats a climatology baseline on day-checks vs authority-declared cells (counts in sales/BUYER_FAQ.md \u2014 quote those, not this single example)"
+   }
+  },
   {
    "type": "corroboration",
    "sources": {
@@ -270,8 +512,8 @@
     "issuing_office": "EYVN",
     "fir": "EYVL",
     "fir_name": "Vilnius FIR \u00b7 Lithuania",
-    "center_lat": 55.7666666061,
-    "center_lng": 22.4833332561,
+    "center_lat": 55.76666660606861,
+    "center_lng": 22.483333256095648,
     "radius_nm": 155.0,
     "start_utc": "2026-07-29T05:10:00+00:00",
     "end_utc": "2026-10-30T21:00:00+00:00",
@@ -455,8 +697,8 @@
    "lead_basis": "commit_to_target_hour",
    "bitcoin": {
     "per_commit_stamp": false,
-    "head_stamps_after_commit": 2,
-    "status": "ancestry anchored by 2 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
+    "head_stamps_after_commit": 3,
+    "status": "ancestry anchored by 3 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
    },
    "honesty": {
     "claim": "one high-confidence forecast was committed hours before its target window; at that window the same area was covered by an independent authority GPS-interference declaration",
@@ -473,259 +715,133 @@
    },
    "verification": {
     "repo_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror",
-    "commit_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/commit/20684678051c32ed63b9158750a223d2202b3635",
-    "file_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/blob/20684678051c32ed63b9158750a223d2202b3635/reports/forecast/2026-08-02/05_h6.parquet",
+    "commit_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/commit/18efec76a97e76da022180c9081dc97cd22db49a",
+    "file_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/blob/18efec76a97e76da022180c9081dc97cd22db49a/reports/forecast/2026-08-04/06_h3.parquet",
     "notam_lookup": {
      "service": "FAA NOTAM Search (public, free)",
      "url": "https://notams.aim.faa.gov/notamSearch/",
-     "instructions": "search location EVRR, NOTAM A3951/26 \u2014 match the text shown here"
+     "instructions": "search location LLLL, NOTAM A0596/26 \u2014 match the text shown here"
     },
     "commands": [
      "git clone https://github.com/saurabhdxt-labs/phantom-record-mirror",
-     "git log --format='%H %cI' --diff-filter=A -- reports/forecast/2026-08-02/05_h6.parquet",
-     "#   -> 20684678051c 2026-08-02T06:40:02+00:00  (before the 11:00 UTC window)",
-     "python -c \"import pandas as p; d=p.read_parquet('reports/forecast/2026-08-02/05_h6.parquet'); print(d[d.probability>=0.7])\"",
+     "git log --format='%H %cI' --diff-filter=A -- reports/forecast/2026-08-04/06_h3.parquet",
+     "#   -> 18efec76a97e 2026-08-04T07:40:06+00:00  (before the 09:00 UTC window)",
+     "python -c \"import pandas as p; d=p.read_parquet('reports/forecast/2026-08-04/06_h3.parquet'); print(d[d.probability>=0.7])\"",
      "# commit time alone is self-settable; the binding bound is the Bitcoin block in the OpenTimestamps proof"
     ]
    },
    "notam": {
-    "id": "16127521",
-    "official_number": "A3951/26",
-    "issuing_office": "EVRA",
-    "fir": "EVRR",
-    "fir_name": "Riga FIR \u00b7 Latvia",
-    "center_lat": 56.3999999408,
-    "center_lng": 23.3833333198,
-    "radius_nm": 165.0,
-    "start_utc": "2026-07-20T14:40:00+00:00",
-    "end_utc": "2026-10-20T12:00:00+00:00",
-    "text_excerpt": "PRECAUTION GNSS SIGNAL INTERFERENCE CAN BE EXPECTED AND MAY \nRESULT IN UNRELIABLE OR UNAVAILABLE GPS SIGNALS WITHIN RIGA FIR. \nCONVENTIONAL NAV AIDS AVAILABLE AND MAY BE USED AS RECOMMENDED IN \nEASA SIB 2022-02R3 \n\nPOSSI"
+    "id": "16164007",
+    "official_number": "A0596/26",
+    "issuing_office": "LLAD",
+    "fir": "LLLL",
+    "fir_name": "Tel Aviv FIR \u00b7 Israel",
+    "center_lat": 31.416666666045785,
+    "center_lng": 35.34999995492399,
+    "radius_nm": 117.0,
+    "start_utc": "2026-07-28T10:45:00+00:00",
+    "end_utc": "2026-08-31T23:59:00+00:00",
+    "text_excerpt": "POSS INTRP TO AIRBORNE GNSS EQPT WI TEL-AVIV FIR."
    },
    "standing_declaration": {
-    "archived_day": "2026-08-02",
+    "archived_day": "2026-08-04",
     "note": "the authority declaration was ALREADY ACTIVE at commit time (standing NOTAM) \u2014 stated up front, not discovered. It is a blanket area warning with no end date; it cannot say which cells or which hour. The model never reads NOTAMs (they are used only to grade it). This receipt shows the model's own call \u2014 specific cells, a specific hour, committed before the window \u2014 inside an area the authority had flagged. It does NOT claim the declaration was predicted."
    },
    "forecast": {
-    "commit_sha": "20684678051c32ed63b9158750a223d2202b3635",
-    "commit_time_utc": "2026-08-02T06:40:02+00:00",
-    "file": "reports/forecast/2026-08-02/05_h6.parquet",
-    "n_matching_rows": 23,
+    "commit_sha": "18efec76a97e76da022180c9081dc97cd22db49a",
+    "commit_time_utc": "2026-08-04T07:40:06+00:00",
+    "file": "reports/forecast/2026-08-04/06_h3.parquet",
+    "n_matching_rows": 9,
     "rows": [
      {
-      "lat": 54.3921,
-      "lng": 22.9402,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.869,
-      "dist_nm": 121.5,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.3892,
-      "lng": 23.0888,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.883,
-      "dist_nm": 121.1,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.3413,
-      "lng": 22.9553,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.876,
-      "dist_nm": 124.5,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.44,
-      "lng": 23.0738,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.882,
-      "dist_nm": 118.2,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.4236,
-      "lng": 23.054,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.877,
-      "dist_nm": 119.2,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.4414,
-      "lng": 22.9995,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.869,
-      "dist_nm": 118.3,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.4549,
-      "lng": 23.168,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.824,
-      "dist_nm": 117.0,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.4228,
-      "lng": 23.0912,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.883,
-      "dist_nm": 119.1,
+      "lat": 32.6869,
+      "lng": 34.9552,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.875,
+      "dist_nm": 78.9,
       "outcome": "hit"
      },
      {
-      "lat": 54.3098,
-      "lng": 22.8417,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.844,
-      "dist_nm": 126.9,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.2747,
-      "lng": 22.9135,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.88,
-      "dist_nm": 128.6,
+      "lat": 32.6465,
+      "lng": 34.9486,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.904,
+      "dist_nm": 76.6,
       "outcome": "hit"
      },
      {
-      "lat": 54.2741,
-      "lng": 22.9506,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.88,
-      "dist_nm": 128.5,
+      "lat": 32.6649,
+      "lng": 34.9656,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.904,
+      "dist_nm": 77.5,
       "outcome": "hit"
      },
      {
-      "lat": 54.3256,
-      "lng": 22.8985,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.847,
-      "dist_nm": 125.6,
+      "lat": 32.6719,
+      "lng": 34.9108,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.901,
+      "dist_nm": 78.6,
       "outcome": "ungraded"
      },
      {
-      "lat": 54.342,
-      "lng": 22.9182,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.869,
-      "dist_nm": 124.6,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.3056,
-      "lng": 23.0642,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.882,
-      "dist_nm": 126.2,
+      "lat": 32.6904,
+      "lng": 34.9278,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.891,
+      "dist_nm": 79.4,
       "outcome": "hit"
      },
      {
-      "lat": 54.2562,
-      "lng": 23.005,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.88,
-      "dist_nm": 129.4,
+      "lat": 32.65,
+      "lng": 34.9213,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.906,
+      "dist_nm": 77.2,
       "outcome": "hit"
      },
      {
-      "lat": 54.3227,
-      "lng": 23.0468,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.882,
-      "dist_nm": 125.2,
+      "lat": 32.6684,
+      "lng": 34.9382,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.906,
+      "dist_nm": 78.0,
       "outcome": "hit"
      },
      {
-      "lat": 54.3399,
-      "lng": 23.0295,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.867,
-      "dist_nm": 124.3,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.4928,
-      "lng": 22.9473,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.849,
-      "dist_nm": 115.5,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.4948,
-      "lng": 22.8357,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.732,
-      "dist_nm": 115.9,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.5235,
-      "lng": 23.0985,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.878,
-      "dist_nm": 113.1,
+      "lat": 32.6535,
+      "lng": 34.8939,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.901,
+      "dist_nm": 77.8,
       "outcome": "hit"
      },
      {
-      "lat": 54.5071,
-      "lng": 23.0787,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.873,
-      "dist_nm": 114.1,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.5905,
-      "lng": 23.1034,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.873,
-      "dist_nm": 109.1,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 54.5256,
-      "lng": 22.9869,
-      "target_utc": "2026-08-02T11:00:00+00:00",
-      "horizon_h": 6,
-      "probability": 0.873,
-      "dist_nm": 113.3,
+      "lat": 32.6315,
+      "lng": 34.9043,
+      "target_utc": "2026-08-04T09:00:00+00:00",
+      "horizon_h": 3,
+      "probability": 0.901,
+      "dist_nm": 76.4,
       "outcome": "hit"
      }
     ]
    },
-   "lead_hours": 4.3,
+   "lead_hours": 1.3,
    "lead_basis": "commit_to_target_hour",
    "bitcoin": {
     "per_commit_stamp": false,
-    "head_stamps_after_commit": 2,
-    "status": "ancestry anchored by 2 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
+    "head_stamps_after_commit": 1,
+    "status": "ancestry anchored by 1 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
    },
    "honesty": {
     "claim": "one high-confidence forecast was committed hours before its target window; at that window the same area was covered by an independent authority GPS-interference declaration",
@@ -763,8 +879,8 @@
     "issuing_office": "EFHK",
     "fir": "EFIN",
     "fir_name": "Helsinki FIR \u00b7 Finland",
-    "center_lat": 64.5833333116,
-    "center_lng": 23.7666665856,
+    "center_lat": 64.58333331160247,
+    "center_lng": 23.766666585579515,
     "radius_nm": 350.0,
     "start_utc": "2026-07-23T06:57:00+00:00",
     "end_utc": "2026-10-23T07:00:00+00:00",
@@ -840,115 +956,8 @@
    "lead_basis": "commit_to_target_hour",
    "bitcoin": {
     "per_commit_stamp": false,
-    "head_stamps_after_commit": 1,
-    "status": "ancestry anchored by 1 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
-   },
-   "honesty": {
-    "claim": "one high-confidence forecast was committed hours before its target window; at that window the same area was covered by an independent authority GPS-interference declaration",
-    "not_claim": "prediction of the declaration itself (it was standing), or per-event skill",
-    "statistical_proof": "the aggregate NOTAM oracle ledger: the model beats a climatology baseline on day-checks vs authority-declared cells (counts in sales/BUYER_FAQ.md \u2014 quote those, not this single example)"
-   }
-  },
-  {
-   "type": "corroboration",
-   "sources": {
-    "forecast_input": "aggregated navigation-integrity fields broadcast by aircraft over open ADS-B networks",
-    "oracle": "aviation-authority GPS-interference NOTAMs (public authority declarations), via a licensed aviation-data API",
-    "record": "public git repository, every forecast committed before its target window; commits anchored into Bitcoin via OpenTimestamps"
-   },
-   "verification": {
-    "repo_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror",
-    "commit_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/commit/7fc5e0a068a0c1dc079d359d88def5d95c538e70",
-    "file_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror/blob/7fc5e0a068a0c1dc079d359d88def5d95c538e70/reports/forecast/2026-08-03/12_h3.parquet",
-    "notam_lookup": {
-     "service": "FAA NOTAM Search (public, free)",
-     "url": "https://notams.aim.faa.gov/notamSearch/",
-     "instructions": "search location LCCC, NOTAM A0799/26 \u2014 match the text shown here"
-    },
-    "commands": [
-     "git clone https://github.com/saurabhdxt-labs/phantom-record-mirror",
-     "git log --format='%H %cI' --diff-filter=A -- reports/forecast/2026-08-03/12_h3.parquet",
-     "#   -> 7fc5e0a068a0 2026-08-03T13:40:05+00:00  (before the 15:00 UTC window)",
-     "python -c \"import pandas as p; d=p.read_parquet('reports/forecast/2026-08-03/12_h3.parquet'); print(d[d.probability>=0.7])\"",
-     "# commit time alone is self-settable; the binding bound is the Bitcoin block in the OpenTimestamps proof"
-    ]
-   },
-   "notam": {
-    "id": "16165944",
-    "official_number": "A0799/26",
-    "issuing_office": "LCNC",
-    "fir": "LCCC",
-    "fir_name": "Nicosia FIR \u00b7 Cyprus",
-    "center_lat": 34.433333315,
-    "center_lng": 32.7666666359,
-    "radius_nm": 171.0,
-    "start_utc": "2026-07-28T16:07:00+00:00",
-    "end_utc": "2026-10-27T23:59:00+00:00",
-    "text_excerpt": "GPS SPOOFING/JAMMING MAY BE ENCOUNTERED IN NICOSIA FIR.\nCREWS ARE ADVISED TO REMAIN VIGILANT AND REPORT TO ATC.\nCONVENTIONAL NAVIGATION PROCEDURES ARE AVAILABLE."
-   },
-   "standing_declaration": {
-    "archived_day": "2026-08-03",
-    "note": "the authority declaration was ALREADY ACTIVE at commit time (standing NOTAM) \u2014 stated up front, not discovered. It is a blanket area warning with no end date; it cannot say which cells or which hour. The model never reads NOTAMs (they are used only to grade it). This receipt shows the model's own call \u2014 specific cells, a specific hour, committed before the window \u2014 inside an area the authority had flagged. It does NOT claim the declaration was predicted."
-   },
-   "forecast": {
-    "commit_sha": "7fc5e0a068a0c1dc079d359d88def5d95c538e70",
-    "commit_time_utc": "2026-08-03T13:40:05+00:00",
-    "file": "reports/forecast/2026-08-03/12_h3.parquet",
-    "n_matching_rows": 5,
-    "rows": [
-     {
-      "lat": 32.6465,
-      "lng": 34.9486,
-      "target_utc": "2026-08-03T15:00:00+00:00",
-      "horizon_h": 3,
-      "probability": 0.904,
-      "dist_nm": 153.1,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 32.6684,
-      "lng": 34.9382,
-      "target_utc": "2026-08-03T15:00:00+00:00",
-      "horizon_h": 3,
-      "probability": 0.901,
-      "dist_nm": 151.8,
-      "outcome": "hit"
-     },
-     {
-      "lat": 32.6535,
-      "lng": 34.8939,
-      "target_utc": "2026-08-03T15:00:00+00:00",
-      "horizon_h": 3,
-      "probability": 0.901,
-      "dist_nm": 150.8,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 32.628,
-      "lng": 34.9317,
-      "target_utc": "2026-08-03T15:00:00+00:00",
-      "horizon_h": 3,
-      "probability": 0.904,
-      "dist_nm": 153.3,
-      "outcome": "ungraded"
-     },
-     {
-      "lat": 32.6315,
-      "lng": 34.9043,
-      "target_utc": "2026-08-03T15:00:00+00:00",
-      "horizon_h": 3,
-      "probability": 0.901,
-      "dist_nm": 152.1,
-      "outcome": "ungraded"
-     }
-    ]
-   },
-   "lead_hours": 1.3,
-   "lead_basis": "commit_to_target_hour",
-   "bitcoin": {
-    "per_commit_stamp": false,
-    "head_stamps_after_commit": 1,
-    "status": "ancestry anchored by 1 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
+    "head_stamps_after_commit": 2,
+    "status": "ancestry anchored by 2 daily HEAD OpenTimestamps stamp(s) with Bitcoin attestation (parent-SHA chain)"
    },
    "honesty": {
     "claim": "one high-confidence forecast was committed hours before its target window; at that window the same area was covered by an independent authority GPS-interference declaration",
