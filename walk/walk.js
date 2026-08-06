@@ -186,13 +186,11 @@
         ' called high-risk (probability ' +
         Math.min.apply(null, f.rows.map(function (r) { return r.probability; })).toFixed(2) +
         '–' + Math.max.apply(null, f.rows.map(function (r) { return r.probability; })).toFixed(2) +
-        ') for ' + fmt(f.rows[0].target_utc) +
-        '. This is a git commit, stamped into Bitcoin before the window — it cannot be back-dated.';
+        ') for ' + fmt(f.rows[0].target_utc) + '.';
       var btc = el('btc-line');
       btc.textContent = '';
       btc.appendChild(document.createTextNode(
-        'Bitcoin-anchored: this commit’s timestamp is bound to a Bitcoin ' +
-        'block via OpenTimestamps — it cannot be back-dated by anyone. '));
+        'Bitcoin-anchored via OpenTimestamps — this timestamp cannot be back-dated by anyone. '));
       var pa = document.createElement('a');
       pa.href = 'https://github.com/saurabhdxt-labs/phantom-record-mirror/tree/main/proofs';
       pa.target = '_blank'; pa.rel = 'noopener';
@@ -277,12 +275,10 @@
           ' nm for months — versus ' + f.n_matching_rows +
           ' cells at ' + f.rows[0].target_utc.slice(11, 16) + ' UTC';
         el('step-body').textContent = 'NOTAM ' + (n.official_number || n.id) +
-          ' ("' + n.text_excerpt.replace(/\s+/g, ' ').slice(0, 90) + '…") has ' +
-          'covered this entire ' + n.radius_nm.toFixed(0) + ' nm circle since ' +
-          fmt(n.start_utc).slice(0, 10) + ', open-ended. An operator cannot ' +
-          'plan around that. Our forecast named ' + f.n_matching_rows +
-          ' five-kilometre cells and one hour — and was right. The model ' +
-          'never reads NOTAMs; declarations are used only to grade it. ' +
+          ' ("' + n.text_excerpt.replace(/\s+/g, ' ').slice(0, 90) + '…") — ' +
+          'the standing blanket warning from step 1. An operator cannot plan ' +
+          'around that. Our forecast named ' + f.n_matching_rows +
+          ' five-kilometre cells and one hour — and was right. ' +
           'Precision inside a blanket warning is the product.';
       }
       var lk = v.notam_lookup || {};
