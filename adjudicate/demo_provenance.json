@@ -128,8 +128,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 2076,
-      "rendered": "2,076"
+      "value": 2081,
+      "rendered": "2,081"
     },
     {
       "id": "c.hours_expected",
@@ -138,8 +138,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 2100,
-      "rendered": "2,100"
+      "value": 2105,
+      "rendered": "2,105"
     },
     {
       "id": "c.hours_missing",
@@ -188,8 +188,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 1782,
-      "rendered": "1,782"
+      "value": 1788,
+      "rendered": "1,788"
     },
     {
       "id": "c.daily_head",
@@ -198,8 +198,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 140,
-      "rendered": "140"
+      "value": 141,
+      "rendered": "141"
     },
     {
       "id": "c.attested",
@@ -208,8 +208,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 1919,
-      "rendered": "1,919"
+      "value": 1927,
+      "rendered": "1,927"
     },
     {
       "id": "c.pending",
@@ -218,8 +218,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 3,
-      "rendered": "3"
+      "value": 2,
+      "rendered": "2"
     },
     {
       "id": "c.attest_method",
@@ -308,8 +308,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 4412,
-      "rendered": "4,412"
+      "value": 52177,
+      "rendered": "52,177"
     },
     {
       "id": "m.hours",
@@ -339,8 +339,8 @@
       "fmt": "plain",
       "note": "cell-hours FLAGGED at or above the export's probability threshold; NOT every cell-hour in the window",
       "field": "cells_in_hour",
-      "value": 49339,
-      "rendered": "49,339"
+      "value": 52175,
+      "rendered": "52,175"
     },
     {
       "id": "m.verdicts_in_window",
@@ -350,8 +350,8 @@
       "fmt": "plain",
       "note": "verdicts actually exported, excluding the pinned examples",
       "field": "verdicts_exported",
-      "value": 4410,
-      "rendered": "4,410"
+      "value": 52175,
+      "rendered": "52,175"
     },
     {
       "id": "m.top_cells",
@@ -360,8 +360,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 60,
-      "rendered": "60"
+      "value": 3000,
+      "rendered": "3,000"
     },
     {
       "id": "m.unknown_cells",
@@ -386,8 +386,8 @@
         "DEGRADED|QUIET",
         "DEGRADED|UNKNOWN"
       ],
-      "value": 3428,
-      "rendered": "3,428"
+      "value": 11068,
+      "rendered": "11,068"
     },
     {
       "id": "x.unknown_nonrefused",
@@ -400,8 +400,8 @@
         "CLEAR|UNKNOWN",
         "DEGRADED|UNKNOWN"
       ],
-      "value": 2828,
-      "rendered": "2,828"
+      "value": 8262,
+      "rendered": "8,262"
     },
     {
       "id": "x.unknown_pct",
@@ -420,8 +420,8 @@
         "DEGRADED|QUIET",
         "DEGRADED|UNKNOWN"
       ],
-      "value": 82,
-      "rendered": "82%"
+      "value": 75,
+      "rendered": "75%"
     },
     {
       "id": "m.refused",
@@ -430,8 +430,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": 984,
-      "rendered": "984"
+      "value": 41109,
+      "rendered": "41,109"
     },
     {
       "id": "m.wstart",
@@ -440,8 +440,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": "2026-10-23T14:00:00Z",
-      "rendered": "2026-10-23T14:00:00Z"
+      "value": "2026-10-23T19:00:00Z",
+      "rendered": "2026-10-23T19:00:00Z"
     },
     {
       "id": "m.wend",
@@ -450,8 +450,8 @@
       "transform": "raw",
       "fmt": "plain",
       "note": "",
-      "value": "2026-10-26T13:00:00Z",
-      "rendered": "2026-10-26T13:00:00Z"
+      "value": "2026-10-26T18:00:00Z",
+      "rendered": "2026-10-26T18:00:00Z"
     },
     {
       "id": "rb.bins",

@@ -18,8 +18,12 @@ function hourLabel(v) {
   return `${d} · ${a.slice(11, 16)}–${b.slice(11, 16)} UTC`;
 }
 
+// Whole minutes, FLOORED: the feed's own lead ("minutes_between"), the
+// walkthrough and the feed spec all floor, and a reader comparing this panel
+// with the API must see the same number (2026-10-26: 79.8 min read "1h 20m"
+// here and "79 minutes" everywhere else).
 function span(ms) {
-  const m = Math.round(ms / 60000);
+  const m = Math.floor(ms / 60000);
   const h = Math.floor(m / 60);
   return h > 0 ? `${h}h ${String(m % 60).padStart(2, '0')}m` : `${m}m`;
 }

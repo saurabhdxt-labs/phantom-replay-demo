@@ -1,284 +1,288 @@
 {
   "cells_per_hour": {
-    "2026-10-23T14:00:00Z": {
-      "cells_in_hour": 946,
-      "verdicts_exported": 63
-    },
-    "2026-10-23T15:00:00Z": {
-      "cells_in_hour": 873,
-      "verdicts_exported": 63
-    },
-    "2026-10-23T16:00:00Z": {
-      "cells_in_hour": 859,
-      "verdicts_exported": 63
-    },
-    "2026-10-23T17:00:00Z": {
-      "cells_in_hour": 618,
-      "verdicts_exported": 63
-    },
-    "2026-10-23T18:00:00Z": {
-      "cells_in_hour": 749,
-      "verdicts_exported": 63
+    "2026-10-10T13:00:00Z": {
+      "cells_in_hour": 2991,
+      "verdicts_exported": 2991
     },
     "2026-10-23T19:00:00Z": {
       "cells_in_hour": 490,
-      "verdicts_exported": 63
+      "verdicts_exported": 490
     },
     "2026-10-23T20:00:00Z": {
       "cells_in_hour": 619,
-      "verdicts_exported": 63
+      "verdicts_exported": 619
     },
     "2026-10-23T21:00:00Z": {
       "cells_in_hour": 993,
-      "verdicts_exported": 63
+      "verdicts_exported": 993
     },
     "2026-10-23T22:00:00Z": {
       "cells_in_hour": 1236,
-      "verdicts_exported": 63
+      "verdicts_exported": 1236
     },
     "2026-10-23T23:00:00Z": {
       "cells_in_hour": 960,
-      "verdicts_exported": 63
+      "verdicts_exported": 960
     },
     "2026-10-24T00:00:00Z": {
       "cells_in_hour": 720,
-      "verdicts_exported": 63
+      "verdicts_exported": 720
     },
     "2026-10-24T01:00:00Z": {
       "cells_in_hour": 714,
-      "verdicts_exported": 63
+      "verdicts_exported": 714
     },
     "2026-10-24T02:00:00Z": {
       "cells_in_hour": 539,
-      "verdicts_exported": 63
+      "verdicts_exported": 539
     },
     "2026-10-24T03:00:00Z": {
       "cells_in_hour": 478,
-      "verdicts_exported": 63
+      "verdicts_exported": 478
     },
     "2026-10-24T04:00:00Z": {
       "cells_in_hour": 786,
-      "verdicts_exported": 63
+      "verdicts_exported": 786
     },
     "2026-10-24T05:00:00Z": {
       "cells_in_hour": 638,
-      "verdicts_exported": 63
+      "verdicts_exported": 638
     },
     "2026-10-24T06:00:00Z": {
       "cells_in_hour": 262,
-      "verdicts_exported": 63
+      "verdicts_exported": 262
     },
     "2026-10-24T07:00:00Z": {
       "cells_in_hour": 405,
-      "verdicts_exported": 63
+      "verdicts_exported": 405
     },
     "2026-10-24T08:00:00Z": {
       "cells_in_hour": 556,
-      "verdicts_exported": 63
+      "verdicts_exported": 556
     },
     "2026-10-24T09:00:00Z": {
       "cells_in_hour": 674,
-      "verdicts_exported": 63
+      "verdicts_exported": 674
     },
     "2026-10-24T10:00:00Z": {
       "cells_in_hour": 999,
-      "verdicts_exported": 63
+      "verdicts_exported": 999
     },
     "2026-10-24T11:00:00Z": {
       "cells_in_hour": 1277,
-      "verdicts_exported": 63
+      "verdicts_exported": 1277
     },
     "2026-10-24T12:00:00Z": {
       "cells_in_hour": 1444,
-      "verdicts_exported": 63
+      "verdicts_exported": 1444
     },
     "2026-10-24T13:00:00Z": {
       "cells_in_hour": 1249,
-      "verdicts_exported": 63
+      "verdicts_exported": 1249
     },
     "2026-10-24T14:00:00Z": {
       "cells_in_hour": 1096,
-      "verdicts_exported": 63
+      "verdicts_exported": 1096
     },
     "2026-10-24T15:00:00Z": {
       "cells_in_hour": 1325,
-      "verdicts_exported": 63
+      "verdicts_exported": 1325
     },
     "2026-10-24T16:00:00Z": {
       "cells_in_hour": 1340,
-      "verdicts_exported": 63
+      "verdicts_exported": 1340
     },
     "2026-10-24T17:00:00Z": {
       "cells_in_hour": 767,
-      "verdicts_exported": 63
+      "verdicts_exported": 767
     },
     "2026-10-24T18:00:00Z": {
       "cells_in_hour": 397,
-      "verdicts_exported": 63
+      "verdicts_exported": 397
     },
     "2026-10-24T19:00:00Z": {
       "cells_in_hour": 474,
-      "verdicts_exported": 63
+      "verdicts_exported": 474
     },
     "2026-10-24T20:00:00Z": {
       "cells_in_hour": 816,
-      "verdicts_exported": 63
+      "verdicts_exported": 816
     },
     "2026-10-24T21:00:00Z": {
       "cells_in_hour": 1231,
-      "verdicts_exported": 63
+      "verdicts_exported": 1231
     },
     "2026-10-24T22:00:00Z": {
       "cells_in_hour": 1192,
-      "verdicts_exported": 63
+      "verdicts_exported": 1192
     },
     "2026-10-24T23:00:00Z": {
       "cells_in_hour": 909,
-      "verdicts_exported": 63
+      "verdicts_exported": 909
     },
     "2026-10-25T00:00:00Z": {
       "cells_in_hour": 834,
-      "verdicts_exported": 63
+      "verdicts_exported": 834
     },
     "2026-10-25T01:00:00Z": {
       "cells_in_hour": 755,
-      "verdicts_exported": 63
+      "verdicts_exported": 755
     },
     "2026-10-25T02:00:00Z": {
       "cells_in_hour": 561,
-      "verdicts_exported": 63
+      "verdicts_exported": 561
     },
     "2026-10-25T03:00:00Z": {
       "cells_in_hour": 652,
-      "verdicts_exported": 63
+      "verdicts_exported": 652
     },
     "2026-10-25T04:00:00Z": {
       "cells_in_hour": 741,
-      "verdicts_exported": 63
+      "verdicts_exported": 741
     },
     "2026-10-25T05:00:00Z": {
       "cells_in_hour": 513,
-      "verdicts_exported": 63
+      "verdicts_exported": 513
     },
     "2026-10-25T06:00:00Z": {
       "cells_in_hour": 311,
-      "verdicts_exported": 63
+      "verdicts_exported": 311
     },
     "2026-10-25T07:00:00Z": {
       "cells_in_hour": 300,
-      "verdicts_exported": 63
+      "verdicts_exported": 300
     },
     "2026-10-25T08:00:00Z": {
       "cells_in_hour": 373,
-      "verdicts_exported": 63
+      "verdicts_exported": 373
     },
     "2026-10-25T09:00:00Z": {
       "cells_in_hour": 517,
-      "verdicts_exported": 63
+      "verdicts_exported": 517
     },
     "2026-10-25T10:00:00Z": {
       "cells_in_hour": 835,
-      "verdicts_exported": 63
+      "verdicts_exported": 835
     },
     "2026-10-25T11:00:00Z": {
       "cells_in_hour": 809,
-      "verdicts_exported": 63
+      "verdicts_exported": 809
     },
     "2026-10-25T12:00:00Z": {
       "cells_in_hour": 847,
-      "verdicts_exported": 63
+      "verdicts_exported": 847
     },
     "2026-10-25T13:00:00Z": {
       "cells_in_hour": 749,
-      "verdicts_exported": 63
+      "verdicts_exported": 749
     },
     "2026-10-25T14:00:00Z": {
       "cells_in_hour": 838,
-      "verdicts_exported": 63
+      "verdicts_exported": 838
     },
     "2026-10-25T15:00:00Z": {
       "cells_in_hour": 773,
-      "verdicts_exported": 63
+      "verdicts_exported": 773
     },
     "2026-10-25T16:00:00Z": {
       "cells_in_hour": 703,
-      "verdicts_exported": 63
+      "verdicts_exported": 703
     },
     "2026-10-25T17:00:00Z": {
       "cells_in_hour": 551,
-      "verdicts_exported": 63
+      "verdicts_exported": 551
     },
     "2026-10-25T18:00:00Z": {
       "cells_in_hour": 500,
-      "verdicts_exported": 63
+      "verdicts_exported": 500
     },
     "2026-10-25T19:00:00Z": {
       "cells_in_hour": 478,
-      "verdicts_exported": 63
+      "verdicts_exported": 478
     },
     "2026-10-25T20:00:00Z": {
       "cells_in_hour": 600,
-      "verdicts_exported": 63
+      "verdicts_exported": 600
     },
     "2026-10-25T22:00:00Z": {
       "cells_in_hour": 357,
-      "verdicts_exported": 63
+      "verdicts_exported": 357
     },
     "2026-10-26T00:00:00Z": {
       "cells_in_hour": 247,
-      "verdicts_exported": 63
+      "verdicts_exported": 247
     },
     "2026-10-26T01:00:00Z": {
       "cells_in_hour": 383,
-      "verdicts_exported": 63
+      "verdicts_exported": 383
     },
     "2026-10-26T02:00:00Z": {
       "cells_in_hour": 436,
-      "verdicts_exported": 63
+      "verdicts_exported": 436
     },
     "2026-10-26T03:00:00Z": {
       "cells_in_hour": 335,
-      "verdicts_exported": 63
+      "verdicts_exported": 335
     },
     "2026-10-26T04:00:00Z": {
       "cells_in_hour": 522,
-      "verdicts_exported": 63
+      "verdicts_exported": 522
     },
     "2026-10-26T05:00:00Z": {
       "cells_in_hour": 544,
-      "verdicts_exported": 63
+      "verdicts_exported": 544
     },
     "2026-10-26T06:00:00Z": {
       "cells_in_hour": 218,
-      "verdicts_exported": 63
+      "verdicts_exported": 218
     },
     "2026-10-26T07:00:00Z": {
       "cells_in_hour": 320,
-      "verdicts_exported": 63
+      "verdicts_exported": 320
     },
     "2026-10-26T08:00:00Z": {
       "cells_in_hour": 192,
-      "verdicts_exported": 63
+      "verdicts_exported": 192
     },
     "2026-10-26T09:00:00Z": {
       "cells_in_hour": 465,
-      "verdicts_exported": 63
+      "verdicts_exported": 465
     },
     "2026-10-26T10:00:00Z": {
       "cells_in_hour": 588,
-      "verdicts_exported": 63
+      "verdicts_exported": 588
     },
     "2026-10-26T11:00:00Z": {
       "cells_in_hour": 725,
-      "verdicts_exported": 63
+      "verdicts_exported": 725
     },
     "2026-10-26T12:00:00Z": {
       "cells_in_hour": 1031,
-      "verdicts_exported": 63
+      "verdicts_exported": 1031
     },
     "2026-10-26T13:00:00Z": {
       "cells_in_hour": 1105,
-      "verdicts_exported": 63
+      "verdicts_exported": 1105
+    },
+    "2026-10-26T14:00:00Z": {
+      "cells_in_hour": 1166,
+      "verdicts_exported": 1166
+    },
+    "2026-10-26T15:00:00Z": {
+      "cells_in_hour": 967,
+      "verdicts_exported": 967
+    },
+    "2026-10-26T16:00:00Z": {
+      "cells_in_hour": 752,
+      "verdicts_exported": 752
+    },
+    "2026-10-26T17:00:00Z": {
+      "cells_in_hour": 579,
+      "verdicts_exported": 579
+    },
+    "2026-10-26T18:00:00Z": {
+      "cells_in_hour": 426,
+      "verdicts_exported": 426
     }
   },
   "console": {
@@ -291,7 +295,7 @@
   },
   "coverage_at_export": {
     "contract_version": "1.1",
-    "generated_at": "2026-10-26T14:11:41Z",
+    "generated_at": "2026-10-26T19:53:57Z",
     "onset": {
       "first_day": "2026-07-02",
       "gaps": [
@@ -321,39 +325,34 @@
     },
     "proofs": {
       "attestation_method": "Bitcoin attestation record present in the proof file; structural reading only, not verified against a Bitcoin node",
-      "attested": 1919,
+      "attested": 1927,
       "attested_unavailable_reason": null,
-      "daily_head": 140,
-      "pending": 3,
-      "per_commit": 1782
+      "daily_head": 141,
+      "pending": 2,
+      "per_commit": 1788
     },
     "record": {
       "first_day": "2026-07-31",
       "gaps": [],
       "hours": {
         "days_with_missing": 11,
-        "expected": 2100,
+        "expected": 2105,
         "missing": 24,
-        "present": 2076
+        "present": 2081
       },
       "last_day": "2026-10-26",
       "n_days": 88
     }
   },
   "export_format": 1,
-  "exported_at": "2026-10-26T14:11:41Z",
+  "exported_at": "2026-10-26T19:53:57Z",
   "generation": {
-    "peak_rss_mb": 430.8,
-    "resumed": false,
-    "wall_seconds": 1557.0
+    "peak_rss_mb": 488.9,
+    "resumed": true,
+    "wall_seconds": 4901.3
   },
   "hours": {
     "exported": [
-      "2026-10-23T14:00:00Z",
-      "2026-10-23T15:00:00Z",
-      "2026-10-23T16:00:00Z",
-      "2026-10-23T17:00:00Z",
-      "2026-10-23T18:00:00Z",
       "2026-10-23T19:00:00Z",
       "2026-10-23T20:00:00Z",
       "2026-10-23T21:00:00Z",
@@ -418,7 +417,12 @@
       "2026-10-26T10:00:00Z",
       "2026-10-26T11:00:00Z",
       "2026-10-26T12:00:00Z",
-      "2026-10-26T13:00:00Z"
+      "2026-10-26T13:00:00Z",
+      "2026-10-26T14:00:00Z",
+      "2026-10-26T15:00:00Z",
+      "2026-10-26T16:00:00Z",
+      "2026-10-26T17:00:00Z",
+      "2026-10-26T18:00:00Z"
     ],
     "incomplete_at_export": [],
     "n_exported": 70,
@@ -435,10 +439,10 @@
     ]
   },
   "kind": "frozen_static_snapshot",
-  "landing_hour": "2026-10-26T13:00:00Z",
+  "landing_hour": "2026-10-26T14:00:00Z",
   "mirror": {
-    "head_commit": "adcbed7c9d368d609f14ea75bca808d923a85772",
-    "head_commit_at_finish": "adcbed7c9d368d609f14ea75bca808d923a85772",
+    "head_commit": "3031263828f8d3e4795debf1bf3d8a9484c6ceed",
+    "head_commit_at_finish": "f6ec38f686bbe24f6613a2e5c51a6d1b9a3ee0d3",
     "repo_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror"
   },
   "not_live_data": true,
@@ -457,45 +461,45 @@
   "ribbon": {
     "bins_marked_not_in_export": [],
     "contract_version": "1.2",
-    "end": "2026-10-26T13:00:00Z",
+    "end": "2026-10-26T18:00:00Z",
     "file": "api/adjudicate/ribbon.json",
     "hours": 72,
-    "start": "2026-10-23T14:00:00Z"
+    "start": "2026-10-23T19:00:00Z"
   },
   "selection": {
     "horizon": 3,
     "min_probability": 0.7,
     "ordering": "highest adjudicability tier, then committed probability, then cell id; unobserved cells (tier null) after the top cells, highest probability first",
-    "top_cells_per_hour": 60,
+    "top_cells_per_hour": 3000,
     "unknown_cells_per_hour": 3
   },
   "totals": {
     "determination_by_geomagnetic": {
-      "CLEAR|QUIET": 69,
-      "CLEAR|UNKNOWN": 568,
-      "DEGRADED|QUIET": 531,
-      "DEGRADED|UNKNOWN": 2260,
-      "REFUSED|NONE": 338,
-      "REFUSED|QUIET": 120,
-      "REFUSED|UNKNOWN": 526
+      "CLEAR|QUIET": 203,
+      "CLEAR|UNKNOWN": 775,
+      "DEGRADED|QUIET": 2603,
+      "DEGRADED|UNKNOWN": 7487,
+      "REFUSED|NONE": 36086,
+      "REFUSED|QUIET": 1121,
+      "REFUSED|UNKNOWN": 3902
     },
     "determinations": {
-      "CLEAR": 637,
-      "DEGRADED": 2791,
-      "REFUSED": 984
+      "CLEAR": 978,
+      "DEGRADED": 10090,
+      "REFUSED": 41109
     },
     "geomagnetic_status": {
-      "NONE": 338,
-      "QUIET": 720,
-      "UNKNOWN": 3354
+      "NONE": 36086,
+      "QUIET": 3927,
+      "UNKNOWN": 12164
     },
     "hour_files": 70,
-    "verdicts": 4412
+    "verdicts": 52177
   },
   "window": {
-    "end_hour": "2026-10-26T13:00:00Z",
+    "end_hour": "2026-10-26T18:00:00Z",
     "end_hour_source": "latest_in_record",
     "requested_hours": 72,
-    "start_hour": "2026-10-23T14:00:00Z"
+    "start_hour": "2026-10-23T19:00:00Z"
   }
 }

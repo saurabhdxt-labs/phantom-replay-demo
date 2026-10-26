@@ -364,6 +364,13 @@ function wireControls() {
   // A pasted or edited link (hash change only) restores that hour and cell.
   window.addEventListener('hashchange', async () => {
     const loc = readLocation();
+    // A hash-driven move off a case's own hour ends that case: the tab must not
+    // stay selected and ?case= must not survive into the next URL (2026-10-26:
+    // the frozen snapshot's NEWEST WITH EVIDENCE navigated by hash and left
+    // "A refusal" highlighted on 26 Oct 13:00Z).
+    const ck = state.get('caseKey');
+    const cs = ck && ck !== 'live' ? CASES.find((c) => c.key === ck) : null;
+    if (loc.hour && cs && cs.hour !== loc.hour) markActive(null);
     if (loc.hour && loc.hour !== state.get('hour')) await loadHour(loc.hour);
     if (loc.cell && loc.cell !== state.get('selected')) await select(loc.cell);
     else if (!loc.cell && state.get('selected')) closeInspector({ focusRow: false });
@@ -414,6 +421,12 @@ async function boot() {
     renderCoverageError($('coverage'), cov.error);
   }
   latest = await findLatest(cov.ok ? cov.data : null);
+  // The gazetteer is ~168 KB and only decorates the list, so it never blocks
+  // the hour the reader asked for. Started here, BEFORE the case branch below:
+  // a deep link straight into a case used to return early and never load it,
+  // so every row on that hour showed coordinates and no country (2026-10-26,
+  // live). When it lands, fill whatever list is on screen.
+  loadCountries().then((ok) => { if (ok) fillCountries(listNode); });
   const loc = readLocation();
   const wanted = CASES.find((c) => c.key === loc.caseKey);
   if (wanted && wanted.key !== 'live') { await openCase(wanted); return; }
@@ -436,10 +449,6 @@ async function boot() {
   // context, so a slow or missing /ribbon must not delay the hour the reader
   // asked for, and must not surface as an error over working content.
   loadRibbon(hour);
-  // The gazetteer is ~168 KB and only decorates the list, so it never blocks
-  // the hour the reader asked for. When it lands, re-render the list once so
-  // the rows gain their country; everything already works without it.
-  loadCountries().then((ok) => { if (ok) fillCountries(listNode); });
 }
 
 let ribbonEnd = null;

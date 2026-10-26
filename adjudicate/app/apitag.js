@@ -35,23 +35,42 @@ function snapshotBlock(call) {
   if (!snap || typeof snap.fileFor !== 'function') return null;
   const file = snap.fileFor(callUrl(call));
   if (!file) return null;
-  const curl = `curl -s '${new URL(file, location.href).href}'`;
+  const href = new URL(file, location.href).href;
+  const curl = `curl -s '${href}'`;
   const copy = el('button', { type: 'button', class: 'copy api-copy' }, 'COPY CURL');
   copy.addEventListener('click', () => copyText(curl, copy));
+  const copyUrl = el('button', { type: 'button', class: 'copy api-copy' }, 'COPY URL');
+  copyUrl.addEventListener('click', () => copyText(href, copyUrl));
   return el('div', { class: 'api-snap' }, [
     el('div', { class: 'api-snap-h' }, 'IN THIS FROZEN SNAPSHOT'),
     el('div', { class: 'api-snap-n' },
-      'This bundle is static, so it cannot answer the query above. It carries '
-      + 'the identical response body as a file, which this command returns:'),
+      'This file carries the identical response body; this command returns it:'),
     el('code', { class: 'api-curl' }, curl),
-    el('div', { class: 'api-actions' }, [copy]),
+    el('div', { class: 'api-actions' }, [copy, copyUrl]),
   ]);
 }
 
 function callBlock(call) {
-  const curl = callCurl(call);
   const rows = Object.entries(call.params).map(([k, val]) =>
     el('div', { class: 'api-param' }, [el('span', { class: 'api-k' }, k), el('span', { class: 'api-v' }, String(val))]));
+  // In a frozen snapshot there is no API server behind this page, so a curl
+  // against this host with a query string can only 404. Never offer a command
+  // that cannot succeed: show the contract call as text, and make the copy
+  // buttons copy the file in this bundle that holds the identical response.
+  // 2026-10-26: a buyer copying the host-bearing form got a 404.
+  const snap = snapshotBlock(call);
+  if (snap) {
+    return el('div', { class: 'api-call' }, [
+      el('div', { class: 'api-line' }, [el('b', {}, call.method), ` ${call.path}`]),
+      rows.length ? el('div', { class: 'api-params' }, rows) : null,
+      el('div', { class: 'api-snap-n' },
+        'Contract call of the live service. This page is a frozen snapshot with no '
+        + 'API server behind it, so the command that actually returns this response '
+        + 'here is the file below.'),
+      snap,
+    ]);
+  }
+  const curl = callCurl(call);
   const copyCurl = el('button', { type: 'button', class: 'copy api-copy' }, 'COPY CURL');
   copyCurl.addEventListener('click', () => copyText(curl, copyCurl));
   const copyUrl = el('button', { type: 'button', class: 'copy api-copy' }, 'COPY URL');
@@ -61,7 +80,6 @@ function callBlock(call) {
     rows.length ? el('div', { class: 'api-params' }, rows) : null,
     el('code', { class: 'api-curl' }, curl),
     el('div', { class: 'api-actions' }, [copyCurl, copyUrl]),
-    snapshotBlock(call),
   ]);
 }
 
