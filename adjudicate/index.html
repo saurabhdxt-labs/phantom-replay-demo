@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PHANTOM — adjudication (frozen snapshot, 2026-10-26)</title>
+  <meta name="description" content="Pre-committed, Bitcoin-timestamped evidence for one place and one hour, or an exact refusal.">
+  <meta name="color-scheme" content="dark">
+  <link rel="preload" href="fonts/InterVariable.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="vendor/leaflet.css">
+  <link rel="stylesheet" href="adjudicate.css">
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="data:,">
+  <style id="static-export-style">#static-export-banner{flex:none;display:flex;flex-wrap:wrap;gap:4px 14px;align-items:baseline;padding:6px 16px;background:#f5a623;color:#111;font:600 12px/1.4 system-ui,sans-serif;border-bottom:2px solid #111}#static-export-banner b{letter-spacing:.12em}#static-export-banner a{color:#111;text-decoration:underline}#static-export-banner .sx-m{font-weight:500}</style>
+</head>
+<body data-adjudicate="1">
+  <div id="static-export-banner" role="note" aria-label="Frozen snapshot notice"><b>FROZEN SNAPSHOT</b><span>Exported 2026-10-26T14:11:41Z (UTC). Not live data.</span><span>Window: 2026-10-23T14:00:00Z to 2026-10-26T13:00:00Z UTC plus 2 pinned example hours; 70 hours, 4412 verdicts exported.</span><span class="sx-m">A cell or hour outside the export shows &ldquo;not in this export&rdquo; &mdash; that is a limit of this snapshot, not a verdict.</span><a href="#hour=2026-10-26T13:00:00Z">go to end of window</a><a href="demo.html" style="margin-left:14px">read the 2-minute walkthrough</a></div>
+  <header class="top">
+    <div class="bar">
+      <span class="brand"><span class="brand-mark" aria-hidden="true"></span>PHANTOM</span>
+      <span class="brand-tag">ADJUDICATION</span>
+      <nav id="cases" class="cases" role="tablist" aria-label="Views"></nav>
+      <details class="anycell">
+        <summary>query any cell</summary>
+        <form id="query-form" autocomplete="off" novalidate>
+          <input id="area" name="area" type="text" spellcheck="false" maxlength="15" aria-label="H3 cell, resolution 7" placeholder="H3 res 7">
+          <input id="hour" name="hour" type="text" spellcheck="false" aria-label="UTC hour" placeholder="2026-10-10T13:00:00Z">
+          <button type="submit" id="submit-btn">RUN</button>
+        </form>
+        <div id="input-error" class="input-error" role="alert" hidden></div>
+      </details>
+    </div>
+    <div class="timebar" role="group" aria-label="Time">
+      <button type="button" id="step-back24" class="step" aria-label="Back 24 hours">« 24H</button>
+      <button type="button" id="step-back" class="step" aria-label="Back one hour">‹ 1H</button>
+      <span id="hour-label" class="hour-label mono" aria-live="polite">…</span>
+      <button type="button" id="step-fwd" class="step" aria-label="Forward one hour">1H ›</button>
+      <button type="button" id="step-fwd24" class="step" aria-label="Forward 24 hours">24H »</button>
+      <span class="sep" aria-hidden="true"></span>
+      <button type="button" id="step-live" class="step">END OF WINDOW</button>
+      <button type="button" id="step-evidence" class="step" title="Newest hour with at least one adjudicable cell">NEWEST WITH EVIDENCE</button>
+      <span id="rec-chip" class="rec-chip mono"></span>
+      <form id="jump-form" class="jump" autocomplete="off">
+        <input id="jump" type="text" spellcheck="false" aria-label="Jump to UTC hour" placeholder="jump to an hour: YYYY-MM-DDTHH">
+        <button type="submit" class="step">GO</button>
+        <span id="jump-error" class="input-error" role="alert" hidden></span>
+      </form>
+    </div>
+  </header>
+
+  <!-- The time ribbon is the primary navigation: it shows WHEN there is anything
+       to adjudicate, which hour steppers cannot. -->
+  <section class="ribbon" id="ribbon" aria-label="Adjudicable cells per hour" hidden>
+    <div class="rb-head">
+      <span class="rb-title">ADJUDICABLE CELLS PER HOUR</span>
+      <span class="rb-sub" id="rb-sub"></span>
+      <span class="rb-key">
+        <span><i class="k-has"></i>observed</span>
+        <span><i class="k-pend"></i>not finished</span>
+        <span><i class="k-gap"></i>not in record</span>
+      </span>
+    </div>
+    <div class="rb-plot" id="rb-plot"></div>
+  </section>
+
+  <main class="stage" id="stage" data-det="loading" data-view="hour">
+    <section class="zone listzone" id="listzone" aria-label="Cells this hour">
+      <div class="hourhead" id="hourhead"></div>
+      <div class="legend" id="legend" aria-label="Legend" hidden></div>
+      <div class="listscroll" id="listscroll">
+        <ul id="celllist" class="celllist"></ul>
+      </div>
+    </section>
+
+    <section class="zone map-panel" id="map-panel" aria-label="Place">
+      <div id="map" class="map"></div>
+      <div class="map-caption" id="map-caption"></div>
+      <div class="oor" id="oor" role="status" hidden></div>
+    </section>
+
+    <aside class="zone inspector" id="inspector" aria-label="Cell verdict" hidden>
+      <header class="insp-head">
+        <div class="insp-title"><span class="insp-kicker">CELL</span><span id="insp-id" class="mono"></span></div>
+        <button type="button" id="insp-close" class="insp-close" aria-label="Close the verdict (Esc)" title="Close (Esc)">×</button>
+      </header>
+      <div class="insp-body" id="insp-body">
+        <section class="hero" id="hero" aria-label="Determination"></section>
+        <section class="legs" id="legs" aria-label="What we can exclude">
+          <h2>WHAT WE CAN EXCLUDE</h2>
+          <ul id="leg-list" class="leg-list"></ul>
+        </section>
+        <section class="chain" id="chain" aria-label="Evidence chain">
+          <h2>EVIDENCE CHAIN</h2>
+          <ol id="chain-list" class="chain-list"></ol>
+        </section>
+        <section class="receipt" id="receipt" aria-label="Proof receipt"></section>
+        <section class="limits" id="limits" aria-label="Limits">
+          <h2>LIMITS</h2>
+          <ul id="limit-list" class="limit-list"></ul>
+        </section>
+      </div>
+    </aside>
+  </main>
+
+  <footer class="scope" id="scope" aria-label="Honest scope">
+    <span class="scope-k">COVERAGE</span>
+    <div id="coverage" class="coverage"><span class="cov-v mono">MEASURING…</span></div>
+  </footer>
+
+  <script src="vendor/leaflet.js"></script>
+  <script src="vendor/h3-js.umd.js"></script>
+  <script id="static-export-shim">
+/* Static-export fetch shim. Reroutes the console's API calls to pre-generated
+   files; an unexported hour/cell gets an honest 404 'not_in_export' (never a
+   REFUSED verdict). */
+(function () {
+  'use strict';
+  var X = {"defaults": {"horizon": 3, "min_probability": 0.7}, "exported_at": "2026-10-26T14:11:41Z", "hours": ["2026-07-20T13:00:00Z", "2026-10-10T13:00:00Z", "2026-10-23T14:00:00Z", "2026-10-23T15:00:00Z", "2026-10-23T16:00:00Z", "2026-10-23T17:00:00Z", "2026-10-23T18:00:00Z", "2026-10-23T19:00:00Z", "2026-10-23T20:00:00Z", "2026-10-23T21:00:00Z", "2026-10-23T22:00:00Z", "2026-10-23T23:00:00Z", "2026-10-24T00:00:00Z", "2026-10-24T01:00:00Z", "2026-10-24T02:00:00Z", "2026-10-24T03:00:00Z", "2026-10-24T04:00:00Z", "2026-10-24T05:00:00Z", "2026-10-24T06:00:00Z", "2026-10-24T07:00:00Z", "2026-10-24T08:00:00Z", "2026-10-24T09:00:00Z", "2026-10-24T10:00:00Z", "2026-10-24T11:00:00Z", "2026-10-24T12:00:00Z", "2026-10-24T13:00:00Z", "2026-10-24T14:00:00Z", "2026-10-24T15:00:00Z", "2026-10-24T16:00:00Z", "2026-10-24T17:00:00Z", "2026-10-24T18:00:00Z", "2026-10-24T19:00:00Z", "2026-10-24T20:00:00Z", "2026-10-24T21:00:00Z", "2026-10-24T22:00:00Z", "2026-10-24T23:00:00Z", "2026-10-25T00:00:00Z", "2026-10-25T01:00:00Z", "2026-10-25T02:00:00Z", "2026-10-25T03:00:00Z", "2026-10-25T04:00:00Z", "2026-10-25T05:00:00Z", "2026-10-25T06:00:00Z", "2026-10-25T07:00:00Z", "2026-10-25T08:00:00Z", "2026-10-25T09:00:00Z", "2026-10-25T10:00:00Z", "2026-10-25T11:00:00Z", "2026-10-25T12:00:00Z", "2026-10-25T13:00:00Z", "2026-10-25T14:00:00Z", "2026-10-25T15:00:00Z", "2026-10-25T16:00:00Z", "2026-10-25T17:00:00Z", "2026-10-25T18:00:00Z", "2026-10-25T19:00:00Z", "2026-10-25T20:00:00Z", "2026-10-25T22:00:00Z", "2026-10-26T00:00:00Z", "2026-10-26T01:00:00Z", "2026-10-26T02:00:00Z", "2026-10-26T03:00:00Z", "2026-10-26T04:00:00Z", "2026-10-26T05:00:00Z", "2026-10-26T06:00:00Z", "2026-10-26T07:00:00Z", "2026-10-26T08:00:00Z", "2026-10-26T09:00:00Z", "2026-10-26T10:00:00Z", "2026-10-26T11:00:00Z", "2026-10-26T12:00:00Z", "2026-10-26T13:00:00Z"], "landing_hour": "2026-10-26T13:00:00Z", "ribbon": {"end": "2026-10-26T13:00:00Z", "hours": 72, "start": "2026-10-23T14:00:00Z"}, "window_end": "2026-10-26T13:00:00Z", "window_start": "2026-10-23T14:00:00Z"};
+  var realFetch = window.fetch.bind(window);
+  var DEF = X.defaults;            // the only horizon / threshold exported
+  function stamp(h) { return /^\d{4}-\d{2}-\d{2}T\d{2}:00:00Z$/.test(h) ? h.slice(0, 13) + 'Z' : null; }
+  function notIncluded(what) {
+    return new Response(JSON.stringify({ error: { code: 'not_in_export', message:
+      what + ' is not included in this export (a frozen snapshot, exported ' + X.exported_at +
+      ', window ' + X.window_start + ' to ' + X.window_end + '). This is a limit of the snapshot, not a verdict.' } }),
+      { status: 404, headers: { 'Content-Type': 'application/json' } });
+  }
+  var HOURS = {};                  // every hour this export holds an hour file for
+  X.hours.forEach(function (h) { HOURS[h] = 1; });
+  function route(raw) {                       // -> { file, what } | { miss } | null (not ours)
+    var u; try { u = new URL(raw, location.href); } catch (e) { return null; }
+    var p = u.pathname, q = u.searchParams;
+    if (p.indexOf('/vendor/') === 0) return { file: 'vendor/' + p.slice(8) };
+    if (p === '/api/adjudicate/coverage') return { file: 'api/adjudicate/coverage.json', api: 1 };
+    if (p === '/api/adjudicate/verification') return { file: 'api/adjudicate/verification.json', api: 1 };
+    if (p === '/api/adjudicate/ribbon') {
+      // The console asks for 'the last 48 hours ending at the VIEWER'S last complete
+      // hour'. A frozen snapshot has one answer: its own window. So 'later than the
+      // snapshot' means 'the newest the snapshot has' (the body's own end/hours say
+      // so), an explicit earlier end is sliced from the file, and anything else
+      // (other horizon/threshold, malformed, entirely before the window, an
+      // export without a ribbon) is an honest not_in_export.
+      var rw = 'The ribbon' + (q.get('end') ? ' ending ' + q.get('end') : ''), R = X.ribbon;
+      var re = q.get('end'), rh = q.get('hours');
+      if (!R || (q.get('horizon') && q.get('horizon') !== String(DEF.horizon)) ||
+          (q.get('min_probability') && Number(q.get('min_probability')) !== DEF.min_probability) ||
+          (re !== null && !stamp(re)) || (rh !== null && !/^[0-9]+$/.test(rh)) ||
+          (rh !== null && Number(rh) < 1)) return { miss: rw };
+      var hiH = (re === null || re > R.end) ? R.end : re;
+      if (hiH < R.start) return { miss: rw };
+      var n = rh === null ? R.hours : Number(rh);
+      var loH = new Date(Date.parse(hiH) - (n - 1) * 3600000).toISOString().slice(0, 13) + ':00:00Z';
+      if (loH < R.start) loH = R.start;
+      return { file: 'api/adjudicate/ribbon.json', api: 1, what: rw, slice: [loH, hiH] };
+    }
+    if (p === '/api/adjudicate/hour') {
+      var hr = q.get('hour') || '', s = stamp(hr);
+      var what = 'The hour ' + hr;
+      // known-unexported hours are answered here: no pointless request, no console 404
+      if (!s || !HOURS[hr] || (q.get('horizon') && q.get('horizon') !== String(DEF.horizon)) ||
+          (q.get('min_probability') && Number(q.get('min_probability')) !== DEF.min_probability))
+        return { miss: what };
+      return { file: 'api/adjudicate/hour/' + s + '.json', api: 1, what: what };
+    }
+    if (p === '/api/adjudicate') {
+      var a = q.get('area') || '', hh = q.get('hour') || '', h = stamp(hh);
+      var w2 = 'The verdict for cell ' + a + ' at ' + hh;
+      if (!/^[0-9a-f]{15}$/.test(a) || !h) return { miss: w2 };
+      return { file: 'api/adjudicate/cell/' + a + '/' + h + '.json', api: 1, what: w2 };
+    }
+    return null;
+  }
+  // Published for the '</> API' popover: the file in this bundle holding the
+  // identical response body, so the popover can show a curl that really works
+  // instead of being hidden. Read-only; returns null for anything not exported.
+  window.__staticSnapshot = {
+    exported_at: X.exported_at,
+    fileFor: function (rawUrl) { var r = route(rawUrl); return (r && r.api && r.file) ? r.file : null; }
+  };
+  window.fetch = function (input, init) {
+    var raw = typeof input === 'string' ? input : (input && input.url) || '';
+    var r = route(raw);
+    if (!r) return realFetch(input, init);
+    if (r.miss) return Promise.resolve(notIncluded(r.miss));
+    return realFetch(r.file, init).then(function (resp) {
+      if (!resp.ok) return r.api ? notIncluded(r.what || 'This data') : resp;
+      if (!r.slice) return resp;
+      return resp.clone().json().then(function (b) {
+        var keep = b.bins.filter(function (x) { return x.hour >= r.slice[0] && x.hour <= r.slice[1]; });
+        if (keep.length === b.bins.length) return resp;      // the whole file: its own bytes
+        if (!keep.length) return notIncluded(r.what);
+        b.bins = keep; b.end = r.slice[1]; b.hours = keep.length;
+        return new Response(JSON.stringify(b), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }, function () { return notIncluded(r.what); });
+    });
+  };
+  // Land on the newest exported hour that has evidence (the console would
+  // otherwise look for the live edge); an explicit #hour= / ?hour= wins.
+  if (!/hour=/.test(location.hash + location.search) && X.landing_hour)
+    history.replaceState(null, '', location.pathname + location.search + '#hour=' + X.landing_hour);
+  // The console renders any non-200 as a red 'NO ANSWER' (its generic fault
+  // state). A missing export is not a fault and not a verdict: relabel it so
+  // it looks like neither (neutral 'OUT' styling), keeping the message.
+  function relabel(root, stage) {
+    var det = root && root.querySelector('.det'), why = root && root.querySelector('.where');
+    if (!det || !why || det.textContent !== 'NO ANSWER' || why.textContent.indexOf('not_in_export') !== 0) return false;
+    det.textContent = 'NOT IN THIS EXPORT';
+    why.textContent = why.textContent.replace(/^not_in_export:\s*/, '');
+    if (stage) stage.setAttribute('data-det', 'OUT');
+    return true;
+  }
+  document.addEventListener('DOMContentLoaded', function () {
+    // 'LATEST' means 'end of this snapshot' here; say so on the buttons.
+    var live = document.getElementById('step-live'), ev = document.getElementById('step-evidence');
+    if (live) { live.textContent = 'END OF WINDOW'; live.title = 'Newest hour in this frozen snapshot'; }
+    if (ev) { ev.textContent = 'NEWEST WITH EVIDENCE'; ev.title = 'Newest exported hour with at least one adjudicable cell'; }
+    // The console finds its 'latest' hour by probing the live record; a
+    // snapshot knows its own answers, so these two buttons use the console's
+    // own #hour= deep-link instead (handled by its hashchange listener).
+    function goto(hour) {
+      return function (e) { e.stopImmediatePropagation(); e.preventDefault(); location.hash = 'hour=' + hour; };
+    }
+    if (live) live.addEventListener('click', goto(X.window_end), true);
+    if (ev) ev.addEventListener('click', goto(X.landing_hour), true);
+    var stage = document.getElementById('stage');
+    ['hero', 'hourhead'].forEach(function (id) {
+      var n = document.getElementById(id);
+      if (n && window.MutationObserver)
+        new MutationObserver(function () { relabel(n, stage); }).observe(n, { childList: true, subtree: true });
+    });
+  });
+})();
+</script>
+  <script type="module" src="app/main.js"></script>
+</body>
+</html>

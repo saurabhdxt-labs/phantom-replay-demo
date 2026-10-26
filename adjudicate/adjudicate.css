@@ -1,0 +1,358 @@
+/* Adjudication console. Space, not lines: zones are separated by gutters and a subtle surface shift.
+   Saturated colour is reserved for STATUS (tier, determination, refusal); chrome stays neutral ink. */
+:root {
+  --bg:#07090e; --zone:#0d1118; --zone-2:#141a26; --zone-3:#1b2231; --map-bg:#070a10;
+  --line:rgba(148,166,210,.12);
+  --text:#e8eaf2; --text-strong:#fff; --text-dim:#a9b0c4; --text-dimmer:#8790a8; --text-faint:#565d73;
+  --accent:#4fd1c5; --accent-bright:#7ee5db;
+  --good:#3fd68f; --warn:#f5a623; --danger:#ff5c61;
+  --mono:ui-monospace,"JetBrains Mono",SFMono-Regular,Menlo,monospace;
+  --det:var(--text-dim);
+  --col-left:392px; --col-right:clamp(400px,30vw,500px);
+  --s1:4px; --s2:8px; --s3:12px; --s4:16px; --s5:24px;
+}
+@font-face{font-family:"Inter";src:url("fonts/InterVariable.woff2") format("woff2");font-weight:100 900;font-display:swap}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;background:var(--bg);color:var(--text);font:13px/1.45 "Inter",system-ui,sans-serif}
+body{display:flex;flex-direction:column;height:100vh;height:100dvh;overflow:hidden}
+.mono{font-family:var(--mono)}
+button{font:inherit;color:inherit}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:2px solid var(--text-dim);outline-offset:2px}
+h2{font-size:10px;letter-spacing:.18em;color:var(--text-dimmer);margin:0 0 var(--s3);font-weight:600}
+[hidden]{display:none !important}
+
+/* header: one quiet band */
+.top{flex:none;padding:var(--s2) var(--s4) var(--s1);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:var(--s4);position:relative;min-height:30px}
+.brand{font-weight:700;letter-spacing:.14em;display:flex;align-items:center;gap:var(--s2)}
+.brand-mark{width:8px;height:8px;border-radius:50%;background:var(--text-strong)}
+.brand-tag{color:var(--text-dimmer);font-size:10px;letter-spacing:.18em}
+.cases{display:flex;gap:var(--s1);margin-left:var(--s4);flex:1}
+.case{background:none;border:0;border-radius:6px;padding:5px var(--s3);cursor:pointer;color:var(--text-dimmer)}
+.case-title{font-weight:600}
+.case:hover{color:var(--text-strong);background:var(--zone-2)}
+.case[aria-selected="true"]{color:var(--text-strong);background:var(--zone-2)}
+.anycell{font-size:11px;color:var(--text-dimmer)}
+.anycell summary{cursor:pointer;list-style:none;letter-spacing:.08em;opacity:.8}
+.anycell summary::-webkit-details-marker{display:none}
+.anycell[open]{position:absolute;right:0;top:100%;z-index:1500;background:var(--zone-2);border-radius:10px;padding:var(--s3);box-shadow:0 12px 30px rgba(0,0,0,.5)}
+.anycell[open] summary{margin-bottom:var(--s2)}
+.anycell form{display:flex;gap:var(--s2)}
+.anycell input{background:var(--zone);border:0;color:var(--text);border-radius:6px;padding:6px var(--s2);font:12px var(--mono);width:170px}
+.anycell button{background:var(--text-strong);color:#04101f;border:0;border-radius:6px;padding:6px var(--s3);font-weight:700;cursor:pointer}
+.input-error{margin-top:var(--s2);color:var(--danger);font:11px var(--mono)}
+
+.timebar{display:flex;align-items:center;gap:var(--s1);flex-wrap:wrap;padding:var(--s1) 0}
+.step{background:none;border:0;border-radius:6px;padding:5px var(--s2);font:600 11px var(--mono);letter-spacing:.06em;cursor:pointer;color:var(--text-dim)}
+.step:hover:not(:disabled){background:var(--zone-2);color:var(--text-strong)}
+.step:disabled{opacity:.3;cursor:default}
+.sep{width:1px;height:14px;background:var(--line);margin:0 var(--s2)}
+.hour-label{min-width:196px;text-align:center;font-size:14px;font-weight:700;color:var(--text-strong);letter-spacing:.03em}
+.rec-chip{font-size:10px;letter-spacing:.08em;padding:3px var(--s2);border-radius:5px;color:var(--text-dimmer);margin-left:var(--s2)}
+.rec-chip[data-state="late"]{border:1px solid var(--warn);color:var(--warn)}
+.rec-chip[data-state="out"]{border:1px dashed var(--text-dimmer);color:var(--text-dim);background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(143,150,173,.14) 6px 8px)}
+.jump{display:flex;gap:var(--s1);align-items:center;margin-left:auto}
+.jump input{background:var(--zone);border:0;border-bottom:1px solid var(--line);color:var(--text);padding:5px var(--s2);font:11px var(--mono);width:190px}
+
+/* stage: list | map | inspector */
+/* ── TIME RIBBON ───────────────────────────────────────────────────────────
+   One column per hour; height = adjudicable cells. One hue, never a ramp: the
+   height already carries magnitude. The selected hour is the emphasis; the two
+   absence states are textures, because neither is a value.
+   Colour is never the only channel -- every state also differs in SHAPE
+   (full bar / hatched block / baseline tick) and is named in the tooltip. */
+.ribbon{flex:none;position:relative;padding:var(--s2) var(--s4) 0;background:var(--zone);
+  border-radius:12px;margin:0 var(--s4) var(--s2)}
+.ribbon[hidden]{display:none}
+.rb-head{display:flex;align-items:baseline;gap:var(--s3);margin-bottom:2px}
+.rb-title{font-size:10px;font-weight:700;letter-spacing:.16em;color:var(--text-dimmer)}
+.rb-sub{font-size:10px;color:var(--text-faint);letter-spacing:.04em}
+.rb-key{margin-left:auto;display:flex;gap:var(--s3);font-size:10px;color:var(--text-faint)}
+.rb-key i{display:inline-block;width:9px;height:9px;margin-right:4px;vertical-align:-1px;border-radius:2px}
+.rb-key .k-has{background:var(--accent)}
+.rb-key .k-pend{background:repeating-linear-gradient(45deg,var(--text-faint) 0 1px,transparent 1px 4px);
+  border:1px solid var(--text-faint)}
+.rb-key .k-gap{border-bottom:2px solid var(--text-faint);height:0;border-radius:0}
+.rb-plot{position:relative}
+.rb-svg{display:block;width:100%;height:58px;color:var(--text-faint)}
+.rb-base{stroke:var(--line);stroke-width:1}
+.rb-day{stroke:var(--line);stroke-width:1}
+.rb-daylabel{fill:var(--text-faint);font:700 8px var(--mono);letter-spacing:.1em}
+/* every column in ONE hue; the selected hour is the only emphasis */
+.rb-bar{fill:var(--accent);opacity:.42;transition:opacity .12s}
+.rb-col[data-selected] .rb-bar{opacity:1}
+.rb-col:hover .rb-bar{opacity:.78}
+.rb-col[data-selected]:hover .rb-bar{opacity:1}
+/* the cursor is visible on EVERY state, including a pending or absent hour */
+.rb-col[data-selected] .rb-pending{opacity:1}
+.rb-col[data-selected] .rb-absent,.rb-col[data-selected] .rb-zero{opacity:1;fill:var(--accent)}
+.rb-zero{fill:var(--text-faint);opacity:.55}
+.rb-absent{fill:var(--text-faint);opacity:.45}
+.rb-pending{opacity:.5}
+.rb-hit{fill:transparent;cursor:pointer}
+.rb-col[data-selected] .rb-hit{cursor:default}
+.rb-tip{position:absolute;bottom:calc(100% - 4px);transform:translateX(-50%);z-index:800;
+  display:flex;flex-direction:column;gap:2px;min-width:210px;max-width:320px;
+  background:var(--zone-2);border:1px solid var(--line);border-radius:8px;
+  padding:var(--s2) var(--s3);box-shadow:0 10px 24px rgba(0,0,0,.5);pointer-events:none}
+.rb-tip[hidden]{display:none}
+.rb-tip b{font-size:12px;color:var(--text-strong)}
+.rb-tip-where{font-size:10px;color:var(--text-dimmer);letter-spacing:.06em}
+.rb-tip-detail{font-size:11px;color:var(--text-dim);line-height:1.4}
+@media (prefers-reduced-motion:reduce){.rb-bar{transition:none}}
+
+.stage{flex:1;min-height:0;display:grid;grid-template-columns:var(--col-left) minmax(0,1fr);gap:var(--s3);padding:var(--s3) var(--s4) var(--s2)}
+.stage[data-view="cell"]{grid-template-columns:var(--col-left) minmax(0,1fr) var(--col-right)}
+.zone{position:relative;min-width:0;min-height:0;background:var(--zone);border-radius:12px;overflow:hidden}
+
+/* list zone: summary + key stay put, only the rows scroll */
+.listzone{display:flex;flex-direction:column}
+.hourhead{flex:none;padding:var(--s4) var(--s4) var(--s3);display:flex;flex-direction:column;gap:var(--s2)}
+.where{font-size:11px;color:var(--text-dimmer);letter-spacing:.06em}
+.det{font-size:clamp(34px,3.4vw,52px);font-weight:800;letter-spacing:.02em;line-height:1;color:var(--det)}
+.hourhead .det{color:var(--text-strong)}
+.stage[data-det="OUT"] .hourhead .det{color:var(--text-dim)}
+/* Exactly ONE hero figure in this view. The unknown count keeps the meter and
+   the sentence below it, so the honest headline stays on screen without two
+   display-size numbers competing to be the subject. */
+.hero-fig{display:flex;flex-direction:column;gap:2px}
+.hero-fig b{font-size:clamp(40px,4vw,56px);line-height:1;font-weight:800;color:var(--text-strong);
+  font-variant-numeric:tabular-nums}
+.hero-fig span{font-size:10px;letter-spacing:.18em;color:var(--text-dimmer)}
+.unk-note{margin-top:var(--s2);font-size:11px;line-height:1.45;color:var(--text-dim);max-width:46ch}
+.ratio-bar{display:flex;gap:3px;height:8px}
+.ratio-bar i{display:block;flex-basis:0;min-width:0;border-radius:2px}
+.rb-ok{background:var(--accent)}
+.rb-unk{border:1px dashed #d3d8ea;background:repeating-linear-gradient(135deg,transparent 0 4px,rgba(211,216,234,.28) 4px 5px)}
+.detrow{font-size:10px;color:var(--text-dimmer);letter-spacing:.05em}
+/* A not-yet-elapsed hour: informational, NOT a refusal, so it must not wear
+   --warn (the refusal token). Accent rail = 'the system is telling you
+   something about time', not 'something went wrong'. */
+.notyet{margin:var(--s2) 0 var(--s1);padding:var(--s2) var(--s3);border-left:2px solid var(--accent);background:var(--zone-2);border-radius:0 6px 6px 0;display:flex;flex-direction:column;gap:3px}
+.notyet b{font-size:10px;letter-spacing:.12em;color:var(--accent)}
+.notyet span{font-size:11px;line-height:1.45;color:var(--text-dim)}
+.oor-note{font-size:12px;color:var(--text-dim);border-left:2px solid var(--text-dimmer);padding-left:var(--s3)}
+
+.legend{flex:none;padding:0 var(--s4) var(--s3);display:flex;flex-direction:column;gap:var(--s1)}
+.lg-rows{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:3px var(--s3)}
+.lg-row{display:flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.05em;color:var(--text-dimmer)}
+.lg-n{color:var(--text-dim);font-size:11px;font-variant-numeric:tabular-nums}
+.lg-row[data-tier="UNKNOWN"] .lg-word,.lg-row[data-tier="UNKNOWN"] .lg-n{color:#d3d8ea}
+.lg-sub,.lg-foot{font-size:9px;letter-spacing:.14em;color:var(--text-faint);margin-top:var(--s1)}
+.sw{width:16px;height:16px;flex:none}
+
+.listscroll{flex:1;min-height:0;overflow-y:auto;padding:0 var(--s2) var(--s3);scrollbar-width:thin;scrollbar-color:var(--zone-3) transparent}
+.celllist{list-style:none;margin:0;padding:0}
+.grp{font-size:9px;letter-spacing:.16em;color:var(--text-dimmer);padding:var(--s4) var(--s2) var(--s1)}
+/* The unknown rows are collapsed by default: hundreds of identical rows bury the
+   adjudicable cells above them. The count stays on the toggle, so the number is
+   never hidden -- only the repetition is. */
+.grp-row{list-style:none}
+.grp-toggle{display:block;width:100%;text-align:left;background:none;border:0;cursor:pointer;
+  font:inherit;font-size:9px;letter-spacing:.16em;color:var(--text-dimmer);
+  padding:var(--s4) var(--s2) var(--s1)}
+.grp-toggle:hover,.grp-toggle:focus-visible{color:var(--text)}
+.celllist[data-unknown="collapsed"] .unk-row{display:none}
+/* where · theatre · tier · determination. The cell id is in the tooltip. */
+.cellbtn{content-visibility:auto;contain-intrinsic-size:auto 30px;width:100%;display:grid;grid-template-columns:16px minmax(0,1fr) 92px 64px 54px;gap:var(--s2);align-items:center;background:none;border:0;border-left:2px solid transparent;border-radius:6px;padding:6px var(--s2);cursor:pointer;text-align:left;font-size:10px}
+.cellbtn:hover{background:var(--zone-2)}
+.cellbtn[aria-current="true"]{background:var(--zone-3);border-left-color:var(--text-strong)}
+.cb-country{font-size:11px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cb-where{font-size:10px;color:var(--text-dimmer);letter-spacing:0;white-space:nowrap}
+.cb-tier{letter-spacing:.04em;color:var(--text-dimmer);text-align:left;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.cb-det{letter-spacing:.06em;text-align:right;color:var(--text-dimmer)}
+.cellbtn[data-det="DEGRADED"] .cb-det{color:var(--danger)}
+.cellbtn[data-det="CLEAR"] .cb-det{color:var(--good)}
+.cellbtn[data-tier="UNKNOWN"] .cb-country,.cellbtn[data-tier="UNKNOWN"] .cb-where,
+.cellbtn[data-tier="UNKNOWN"] .cb-tier{color:var(--text-dimmer)}
+
+/* map zone */
+.map-panel{background:var(--map-bg)}
+.map{position:absolute;inset:0;background:var(--map-bg)}
+.leaflet-container{background:var(--map-bg);font:inherit}
+.map-caption{position:absolute;right:var(--s3);bottom:var(--s2);z-index:500;font:10px var(--mono);letter-spacing:.08em;color:var(--text-dimmer)}
+.map-caption:empty{display:none}
+.mapfit{position:absolute;left:10px;top:84px;z-index:700;background:rgba(13,17,24,.85);border:0;border-radius:6px;padding:5px var(--s2);font:600 10px var(--mono);letter-spacing:.08em;color:var(--text-dim);cursor:pointer}
+.mapfit:hover{color:var(--text-strong);background:var(--zone-3)}
+.mapempty{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:600;font-size:11px;letter-spacing:.14em;color:var(--text-dim);pointer-events:none;background:rgba(13,17,24,.8);padding:var(--s2) var(--s4);border-radius:8px}
+.leaflet-control-scale-line{background:rgba(10,13,19,.7);color:var(--text-dimmer);border-color:var(--text-faint);font-size:10px}
+.leaflet-bar{border:0 !important}
+.leaflet-bar a{background:rgba(13,17,24,.85);color:var(--text-dim);border:0}
+.leaflet-bar a:hover{background:var(--zone-3);color:var(--text-strong)}
+.cell-canvas{position:absolute;left:0;top:0;pointer-events:none;z-index:450}
+.cell-tip{position:absolute;z-index:700;pointer-events:none;font-size:11px;background:var(--zone-2);border-radius:6px;padding:5px var(--s2);color:var(--text);white-space:nowrap}
+.oor{position:absolute;inset:0;z-index:650;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:var(--s2);pointer-events:none;
+  background:repeating-linear-gradient(135deg,rgba(5,6,10,.78) 0 14px,rgba(40,46,62,.78) 14px 16px)}
+.oor-title{font-size:clamp(28px,4vw,52px);font-weight:800;letter-spacing:.08em;color:var(--text-strong)}
+.oor-reason{font-size:13px;letter-spacing:.14em;color:var(--text-dim)}
+.oor-hour{font-size:12px;color:var(--text-dimmer)}
+
+/* determination colour token (status only) */
+.stage[data-det="DEGRADED"]{--det:var(--danger)}
+.stage[data-det="CLEAR"]{--det:var(--good)}
+.stage[data-det="REFUSED"]{--det:var(--warn)}
+.stage[data-det="error"]{--det:var(--danger)}
+.stage[data-det="HOUR"]{--det:var(--text-strong)}
+.stage[data-det="OUT"]{--det:var(--text-dim)}
+.stage[data-det="OUT"] .det{font-size:clamp(28px,3vw,42px)}
+.stage[data-det="loading"] .insp-body{opacity:.4}
+
+/* inspector zone */
+.inspector{display:flex;flex-direction:column}
+.insp-head{flex:none;display:flex;align-items:center;justify-content:space-between;gap:var(--s3);padding:var(--s3) var(--s3) var(--s2) var(--s4)}
+.insp-title{display:flex;align-items:baseline;gap:var(--s3);min-width:0}
+.insp-kicker{font-size:10px;letter-spacing:.18em;color:var(--text-dimmer)}
+#insp-id{font-size:12px;color:var(--text);overflow:hidden;text-overflow:ellipsis}
+.insp-close{flex:none;width:30px;height:30px;border:0;border-radius:6px;background:var(--zone-2);color:var(--text-strong);font-size:20px;line-height:1;cursor:pointer}
+.insp-close:hover{background:var(--zone-3)}
+.insp-body{flex:1;min-height:0;overflow-y:auto;padding:var(--s1) var(--s4) var(--s5);display:flex;flex-direction:column;gap:var(--s5);scrollbar-width:thin;scrollbar-color:var(--zone-3) transparent}
+.insp-body > section{position:relative;flex:none}
+
+.hero{border-left:3px solid var(--det);padding-left:var(--s4);display:flex;flex-direction:column;gap:var(--s2)}
+.tier{display:flex;align-items:center;gap:var(--s3);font-size:11px}
+.tier .k{color:var(--text-dimmer);letter-spacing:.16em}
+.tier .tv{color:var(--text-strong);font-size:12px;letter-spacing:.06em}
+.pips{display:inline-flex;gap:3px}
+.pips i{width:16px;height:5px;border-radius:2px;background:var(--zone-3)}
+.pips i.on{background:var(--accent)}
+.declined{display:inline-flex;align-items:center;gap:var(--s2);align-self:flex-start;color:var(--warn);font-size:12px;font-weight:700;letter-spacing:.12em;border:1px solid var(--warn);border-radius:6px;padding:5px var(--s3)}
+.declined .ico{width:15px;height:15px}
+.ico{width:18px;height:18px;flex:none}
+
+/* legs: the one place borders carry meaning (solid = false, dashed + hatched = NOT ASSESSED) */
+.leg-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--s2)}
+.leg{display:flex;gap:var(--s3);align-items:center;border-radius:8px;padding:var(--s2) var(--s3);border:1px solid}
+.leg-ico{width:22px;height:22px}
+.leg-name{font-weight:600;color:var(--text-strong);font-size:13px}
+.leg-sub{font-weight:400;color:var(--text-dimmer);font-size:11px}
+.leg-state{font-size:11px;letter-spacing:.1em;display:flex;gap:var(--s3);align-items:baseline}
+.leg-state em{font-style:normal;letter-spacing:0;color:var(--text-dimmer)}
+.leg[data-state="true"]{border-style:solid;border-color:var(--good);background:rgba(63,214,143,.08);color:var(--good)}
+.leg[data-state="false"]{border-style:solid;border-color:var(--danger);background:rgba(255,92,97,.08);color:var(--danger)}
+.leg[data-state="null"]{border-style:dashed;border-color:var(--text-faint);color:var(--text-dimmer);background:repeating-linear-gradient(135deg,transparent 0 6px,rgba(143,150,173,.09) 6px 8px)}
+.leg[data-state="null"] .leg-name{color:var(--text-dim)}
+
+/* evidence chain: compact so four stages fit the inspector */
+.chain-list{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;align-items:flex-start}
+.chain-note{flex:0 0 100%;margin-top:var(--s3);font-size:11px;color:var(--warn);border-left:2px solid var(--warn);padding-left:var(--s3);overflow-wrap:anywhere}
+.node{flex:1 1 0;min-width:0;display:flex;flex-direction:column;align-items:center;gap:3px;text-align:center}
+.disc{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;border:2px solid}
+.disc .ico{width:20px;height:20px}
+.node-name{font-size:9px;letter-spacing:.12em;font-weight:700;color:var(--text-strong)}
+.node-word{font-size:9px;letter-spacing:.12em}
+.node-sub{font-size:10px;color:var(--text-dim);max-width:100%;overflow-wrap:anywhere;padding:0 2px}
+.node[data-state="passed"] .disc{border-color:var(--accent);color:var(--accent);background:rgba(79,209,197,.12)}
+.node[data-state="passed"] .node-word{color:var(--accent)}
+.node[data-state="failed"] .disc{border-color:var(--warn);color:var(--warn);background:rgba(245,166,35,.14);box-shadow:0 0 0 5px rgba(245,166,35,.10)}
+.node[data-state="failed"] .node-word{color:var(--warn);font-weight:800}
+.node[data-state="failed"] .node-sub{color:var(--warn)}
+.node[data-state="unreached"] .disc{border-style:dashed;border-color:var(--text-faint);color:var(--text-faint)}
+.node[data-state="unreached"] .node-name,.node[data-state="unreached"] .node-word,.node[data-state="unreached"] .node-sub{color:var(--text-faint)}
+.link{flex:0 0 16px;height:38px;position:relative}
+.link::before{content:"";position:absolute;left:0;right:0;top:18px;height:3px;border-radius:2px}
+.link[data-link="ok"]::before{background:var(--accent)}
+.link[data-link="idle"]::before{height:0;border-top:3px dashed var(--text-faint);background:none;opacity:.6}
+.link[data-link="broken"]::before{background:linear-gradient(90deg,var(--accent) 0 38%,transparent 38% 62%,transparent 62%)}
+.link[data-link="broken"]::after{content:"✕";position:absolute;left:50%;top:18px;transform:translate(-50%,-50%);color:var(--warn);font-weight:800;font-size:15px;background:var(--zone);padding:0 3px;line-height:1}
+
+/* receipt */
+.receipt{display:flex;flex-direction:column;gap:var(--s2)}
+.receipt h2{margin-bottom:var(--s1)}
+.bignum{font:800 clamp(24px,2.6vw,34px)/1 var(--mono);color:var(--text-strong);letter-spacing:.02em}
+/* A pending stamp is a HEALTHY state: the commit is made and the OpenTimestamps
+   proof is lodged, only the Bitcoin block has not landed yet. --warn is the
+   refusal colour (.declined, .chain-note, failed chain nodes); using it here
+   made a sound receipt read as a failure. Neutral ink = in progress. */
+.bignum.pending{color:var(--text-dim)}
+.pendnote{font-size:11px;color:var(--text-dimmer);line-height:1.45;max-width:46ch}
+.bignum.none{color:var(--text-faint);border:2px dashed var(--text-faint);border-radius:8px;padding:var(--s3);align-self:flex-start;font-size:20px}
+.rline{font-size:11px;color:var(--text-dim)}
+.precedes{display:flex;align-items:center;gap:var(--s2);font-size:11px;letter-spacing:.08em;font-weight:700}
+.precedes .ico{width:16px;height:16px}
+.precedes.yes{color:var(--good)}.precedes.no{color:var(--danger)}
+.cmdrow{display:flex;gap:var(--s2);align-items:stretch;margin-top:var(--s1)}
+.cmd{flex:1;min-width:0;background:var(--zone-2);border-radius:6px;padding:var(--s2) var(--s3);font-size:11px;color:var(--text);overflow-wrap:anywhere}
+.copy{background:var(--zone-3);border:0;border-radius:6px;padding:0 var(--s3);font-size:10px;letter-spacing:.1em;font-weight:700;cursor:pointer}
+.copy:hover{background:var(--text-strong);color:#04101f}
+
+.limit-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:var(--s2)}
+.limit-list li{font-size:11px;color:var(--text-dim);padding-left:var(--s3);border-left:2px solid var(--line)}
+
+/* </> API: present, recessive. Shows on hover or focus. */
+.api-snap{margin-top:var(--s3);padding-top:var(--s3);border-top:1px solid var(--line)}
+.api-snap-h{font-size:10px;font-weight:700;letter-spacing:.14em;color:var(--accent)}
+.api-snap-n{margin:var(--s1) 0 var(--s2);font-size:11px;line-height:1.45;color:var(--text-dimmer)}
+/* Above Leaflet's own controls. Leaflet gives .leaflet-top/.leaflet-bottom
+   z-index 1000, so at 900 the zoom buttons painted over the map panel's
+   popover -- measured at 1024px, where the panel is narrow enough for
+   them to overlap. */
+.apiwrap{position:absolute;top:var(--s2);right:var(--s2);z-index:1100;opacity:0;transition:opacity .15s}
+:hover > .apiwrap,:focus-within > .apiwrap,.apiwrap:has(.apibtn[aria-expanded="true"]){opacity:1}
+.apibtn{background:none;border:0;border-radius:5px;padding:2px 6px;font:700 10px var(--mono);letter-spacing:.04em;color:var(--text-dimmer);cursor:pointer}
+.apibtn:hover,.apibtn[aria-expanded="true"]{color:var(--text-strong);background:var(--zone-3)}
+/* position:FIXED, not absolute: every .zone sets overflow:hidden, which clipped
+   this popover inside the panel (the API affordance was cut off in the left
+   column and the inspector alike). A fixed box is not clipped by ancestor
+   overflow; apitag.js places it from the button's rect and clamps it to the
+   viewport. No ancestor may use transform/filter/contain, or it would become
+   the containing block and the clipping would come back -- see .scope .apiwrap. */
+.apipop{position:fixed;width:min(460px,86vw);max-height:calc(100dvh - 16px);overflow-y:auto;background:var(--zone-2);border-radius:10px;padding:var(--s3);display:flex;flex-direction:column;gap:var(--s3);box-shadow:0 12px 30px rgba(0,0,0,.55)}
+.apipop[hidden]{display:none}
+/* A panel whose popover is open is lifted above its siblings. Each
+   .zone is position:relative with auto z-index, so panels paint in DOM
+   order: at narrow widths the inspector painted over the map panel's
+   popover (measured at 1024px, 1 of 9 hit-test points blocked). The
+   popover is fixed, but it cannot escape its parent's paint order. */
+.zone:has(.apibtn[aria-expanded="true"]),
+.scope:has(.apibtn[aria-expanded="true"]),
+.ribbon:has(.apibtn[aria-expanded="true"]){z-index:950}
+
+.scope .apiwrap{top:0;bottom:0;display:flex;align-items:center}
+.api-line{font:12px var(--mono);color:var(--text-strong)}
+.api-line b{color:var(--text-dim)}
+.api-params{display:grid;grid-template-columns:auto 1fr;gap:2px var(--s3);margin:var(--s1) 0;font:11px var(--mono)}
+.api-param{display:contents}
+.api-k{color:var(--text-dimmer)}.api-v{color:var(--text);overflow-wrap:anywhere}
+.api-curl{display:block;background:var(--zone);border-radius:6px;padding:6px var(--s2);font:11px var(--mono);overflow-wrap:anywhere;color:var(--text)}
+.api-actions{display:flex;gap:6px;margin-top:6px}
+.api-copy{padding:4px var(--s3);font-size:10px}
+
+/* coverage: one calm line, detail on demand */
+.scope{flex:none;position:relative;display:flex;gap:var(--s4);align-items:center;padding:var(--s2) var(--s4) var(--s3);font-size:10px;color:var(--text-dimmer)}
+.scope-k{letter-spacing:.18em;font-weight:700;color:var(--text-dimmer)}
+.coverage{flex:1;min-width:0;display:flex;align-items:center;gap:var(--s3);padding-right:56px}
+.cov-line{display:flex;gap:var(--s5);flex-wrap:wrap;color:var(--text-dim);font-size:10px}
+.cov-toggle{background:none;border:0;border-radius:5px;padding:2px 6px;font:600 9px var(--mono);letter-spacing:.14em;color:var(--text-dimmer);cursor:pointer}
+.cov-toggle:hover,.cov-toggle[aria-expanded="true"]{color:var(--text-strong);background:var(--zone-2)}
+.cov-detail{position:absolute;left:var(--s4);right:var(--s4);bottom:calc(100% + 4px);z-index:1200;background:var(--zone-2);border-radius:10px;padding:var(--s4);display:flex;flex-direction:column;gap:var(--s3);box-shadow:0 12px 30px rgba(0,0,0,.55)}
+.cov-row{display:grid;grid-template-columns:64px minmax(180px,1fr) minmax(220px,auto);gap:var(--s1) var(--s4);align-items:center}
+.cov-k{letter-spacing:.14em;font-weight:700;color:var(--text-dim)}
+.cov-track{position:relative;height:10px;border-radius:3px;background:var(--zone);overflow:hidden}
+.cov-fill{position:absolute;top:0;bottom:0;background:var(--text-dim)}
+.cov-gap{position:absolute;top:0;bottom:0;background:var(--zone-2);background-image:repeating-linear-gradient(135deg,transparent 0 3px,rgba(143,150,173,.5) 3px 4px)}
+.cov-v{color:var(--text);font-size:11px}
+.cov-gaps{grid-column:2 / 4;font-size:10px;color:var(--text-dimmer)}
+.cov-proofs{font-size:11px;color:var(--text);margin-left:80px}
+.cov-method{font-size:10px;color:var(--text-dimmer);margin-left:80px}
+
+/* narrow screens: stacked, the inspector becomes a sheet over everything */
+@media (max-width:1180px){:root{--col-left:316px}
+  /* The list column drops to 316px here, which leaves the country name 9px
+     once the fixed columns are paid for -- measured, and it clipped even
+     "UK". The tier WORD is what gives way: the swatch already encodes tier
+     and the key above the list says so, while the country and the
+     determination have no other representation in the row. */
+  .cellbtn{grid-template-columns:16px minmax(0,1fr) 92px 54px}
+  .cellbtn .cb-tier{display:none}}
+@media (max-width:860px){
+  body{height:auto;overflow:auto}
+  .stage,.stage[data-view="cell"]{display:flex;flex-direction:column;flex:none}
+  .map-panel{height:56vh;flex:none}
+  .listzone{max-height:70vh}
+  .inspector{position:fixed;inset:var(--s4);z-index:2000;box-shadow:0 20px 60px rgba(0,0,0,.7);background:var(--zone-2)}
+  .cases{flex-basis:100%;margin-left:0}
+  .jump{margin-left:0}
+  .cov-row{grid-template-columns:1fr}.cov-gaps{grid-column:1}
+  .coverage{padding-right:0}
+}
+@media (prefers-reduced-motion:reduce){.apiwrap{transition:none}}

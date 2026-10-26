@@ -1,0 +1,497 @@
+{
+  "facts": [
+    {
+      "id": "v.det",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "determination",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "DEGRADED",
+      "rendered": "DEGRADED"
+    },
+    {
+      "id": "v.tier",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "adjudicability_tier",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "STRONG",
+      "rendered": "STRONG"
+    },
+    {
+      "id": "v.cell",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "query.area",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "871fae670ffffff",
+      "rendered": "871fae670ffffff"
+    },
+    {
+      "id": "v.start",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "query.window_start",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "2026-10-10T13:00:00Z",
+      "rendered": "2026-10-10T13:00:00Z"
+    },
+    {
+      "id": "v.sha",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "proof.commit_sha",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "60cf7d9c44ca0ae41a3b3172ea66f69f445f9af8",
+      "rendered": "60cf7d9c44ca0ae41a3b3172ea66f69f445f9af8"
+    },
+    {
+      "id": "v.committed_at",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "proof.committed_at",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "2026-10-10T11:40:04Z",
+      "rendered": "2026-10-10T11:40:04Z"
+    },
+    {
+      "id": "v.block",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "proof.bitcoin_block",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 970761,
+      "rendered": "970,761"
+    },
+    {
+      "id": "v.lead_min",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "proof.committed_at",
+      "transform": "minutes_between",
+      "fmt": "plain",
+      "note": "whole minutes from the commit to the start of the hour it describes",
+      "to": "query.window_start",
+      "value": 79,
+      "rendered": "79"
+    },
+    {
+      "id": "v.verify_cmd",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "proof.verify_command",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "ots info proofs/mirror/60cf7d9c44ca0ae41a3b3172ea66f69f445f9af8.sha.ots",
+      "rendered": "ots info proofs/mirror/60cf7d9c44ca0ae41a3b3172ea66f69f445f9af8.sha.ots"
+    },
+    {
+      "id": "m.repo",
+      "source": "export_manifest.json",
+      "path": "mirror.repo_url",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "https://github.com/saurabhdxt-labs/phantom-record-mirror",
+      "rendered": "https://github.com/saurabhdxt-labs/phantom-record-mirror"
+    },
+    {
+      "id": "c.record_days",
+      "source": "api/adjudicate/coverage.json",
+      "path": "record.n_days",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 88,
+      "rendered": "88"
+    },
+    {
+      "id": "c.record_gaps",
+      "source": "api/adjudicate/coverage.json",
+      "path": "record.gaps",
+      "transform": "len",
+      "fmt": "plain",
+      "note": "",
+      "value": 0,
+      "rendered": "0"
+    },
+    {
+      "id": "c.hours_present",
+      "source": "api/adjudicate/coverage.json",
+      "path": "record.hours.present",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 2076,
+      "rendered": "2,076"
+    },
+    {
+      "id": "c.hours_expected",
+      "source": "api/adjudicate/coverage.json",
+      "path": "record.hours.expected",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 2100,
+      "rendered": "2,100"
+    },
+    {
+      "id": "c.hours_missing",
+      "source": "api/adjudicate/coverage.json",
+      "path": "record.hours.missing",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 24,
+      "rendered": "24"
+    },
+    {
+      "id": "c.hours_days_missing",
+      "source": "api/adjudicate/coverage.json",
+      "path": "record.hours.days_with_missing",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 11,
+      "rendered": "11"
+    },
+    {
+      "id": "c.onset_days",
+      "source": "api/adjudicate/coverage.json",
+      "path": "onset.n_days",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 63,
+      "rendered": "63"
+    },
+    {
+      "id": "c.onset_gaps",
+      "source": "api/adjudicate/coverage.json",
+      "path": "onset.gaps",
+      "transform": "len",
+      "fmt": "plain",
+      "note": "",
+      "value": 4,
+      "rendered": "4"
+    },
+    {
+      "id": "c.per_commit",
+      "source": "api/adjudicate/coverage.json",
+      "path": "proofs.per_commit",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 1782,
+      "rendered": "1,782"
+    },
+    {
+      "id": "c.daily_head",
+      "source": "api/adjudicate/coverage.json",
+      "path": "proofs.daily_head",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 140,
+      "rendered": "140"
+    },
+    {
+      "id": "c.attested",
+      "source": "api/adjudicate/coverage.json",
+      "path": "proofs.attested",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 1919,
+      "rendered": "1,919"
+    },
+    {
+      "id": "c.pending",
+      "source": "api/adjudicate/coverage.json",
+      "path": "proofs.pending",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 3,
+      "rendered": "3"
+    },
+    {
+      "id": "c.attest_method",
+      "source": "api/adjudicate/coverage.json",
+      "path": "proofs.attestation_method",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "Bitcoin attestation record present in the proof file; structural reading only, not verified against a Bitcoin node",
+      "rendered": "Bitcoin attestation record present in the proof file; structural reading only, not verified against a Bitcoin node"
+    },
+    {
+      "id": "r.detail",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-07-20T13Z.json",
+      "path": "refusal.detail",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "no committed forecast row covers this area and hour",
+      "rendered": "no committed forecast row covers this area and hour"
+    },
+    {
+      "id": "r.stage",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-07-20T13Z.json",
+      "path": "refusal.stage",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "record",
+      "rendered": "record"
+    },
+    {
+      "id": "v.limit0",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "limits.0",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "Coverage limit: the adjudicability tier is STRONG; the observation count behind it is not disclosed.",
+      "rendered": "Coverage limit: the adjudicability tier is STRONG; the observation count behind it is not disclosed."
+    },
+    {
+      "id": "v.limit1",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "limits.1",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "no evidence is not the same as no event: this verdict reports only what the anchored record contains.",
+      "rendered": "no evidence is not the same as no event: this verdict reports only what the anchored record contains."
+    },
+    {
+      "id": "v.limit2",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "limits.2",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "This is an evidence assembly from a pre-committed, anchored record; it makes no forecast.",
+      "rendered": "This is an evidence assembly from a pre-committed, anchored record; it makes no forecast."
+    },
+    {
+      "id": "v.limit3",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "limits.3",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "Geomagnetic context unavailable for this window; this alternative explanation was not assessed.",
+      "rendered": "Geomagnetic context unavailable for this window; this alternative explanation was not assessed."
+    },
+    {
+      "id": "v.limit4",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json",
+      "path": "limits.4",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "Space weather was not assessed for this window, so it is not excluded as an explanation; this is not counted as satisfied.",
+      "rendered": "Space weather was not assessed for this window, so it is not excluded as an explanation; this is not counted as satisfied."
+    },
+    {
+      "id": "m.verdicts",
+      "source": "export_manifest.json",
+      "path": "totals.verdicts",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 4412,
+      "rendered": "4,412"
+    },
+    {
+      "id": "m.hours",
+      "source": "export_manifest.json",
+      "path": "totals.hour_files",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 70,
+      "rendered": "70"
+    },
+    {
+      "id": "m.pinned",
+      "source": "export_manifest.json",
+      "path": "pinned",
+      "transform": "len",
+      "fmt": "plain",
+      "note": "",
+      "value": 2,
+      "rendered": "2"
+    },
+    {
+      "id": "m.cells_in_window",
+      "source": "export_manifest.json",
+      "path": "cells_per_hour",
+      "transform": "sum_field",
+      "fmt": "plain",
+      "note": "cell-hours FLAGGED at or above the export's probability threshold; NOT every cell-hour in the window",
+      "field": "cells_in_hour",
+      "value": 49339,
+      "rendered": "49,339"
+    },
+    {
+      "id": "m.verdicts_in_window",
+      "source": "export_manifest.json",
+      "path": "cells_per_hour",
+      "transform": "sum_field",
+      "fmt": "plain",
+      "note": "verdicts actually exported, excluding the pinned examples",
+      "field": "verdicts_exported",
+      "value": 4410,
+      "rendered": "4,410"
+    },
+    {
+      "id": "m.top_cells",
+      "source": "export_manifest.json",
+      "path": "selection.top_cells_per_hour",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 60,
+      "rendered": "60"
+    },
+    {
+      "id": "m.unknown_cells",
+      "source": "export_manifest.json",
+      "path": "selection.unknown_cells_per_hour",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 3,
+      "rendered": "3"
+    },
+    {
+      "id": "x.nonrefused",
+      "source": "export_manifest.json",
+      "path": "totals.determination_by_geomagnetic",
+      "transform": "sum_keys",
+      "fmt": "plain",
+      "note": "",
+      "keys": [
+        "CLEAR|QUIET",
+        "CLEAR|UNKNOWN",
+        "DEGRADED|QUIET",
+        "DEGRADED|UNKNOWN"
+      ],
+      "value": 3428,
+      "rendered": "3,428"
+    },
+    {
+      "id": "x.unknown_nonrefused",
+      "source": "export_manifest.json",
+      "path": "totals.determination_by_geomagnetic",
+      "transform": "sum_keys",
+      "fmt": "plain",
+      "note": "",
+      "keys": [
+        "CLEAR|UNKNOWN",
+        "DEGRADED|UNKNOWN"
+      ],
+      "value": 2828,
+      "rendered": "2,828"
+    },
+    {
+      "id": "x.unknown_pct",
+      "source": "export_manifest.json",
+      "path": "totals.determination_by_geomagnetic",
+      "transform": "pct_of_keys",
+      "fmt": "pct",
+      "note": "share of NON-REFUSED verdicts whose space-weather leg could not be assessed",
+      "keys": [
+        "CLEAR|UNKNOWN",
+        "DEGRADED|UNKNOWN"
+      ],
+      "of_keys": [
+        "CLEAR|QUIET",
+        "CLEAR|UNKNOWN",
+        "DEGRADED|QUIET",
+        "DEGRADED|UNKNOWN"
+      ],
+      "value": 82,
+      "rendered": "82%"
+    },
+    {
+      "id": "m.refused",
+      "source": "export_manifest.json",
+      "path": "totals.determinations.REFUSED",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": 984,
+      "rendered": "984"
+    },
+    {
+      "id": "m.wstart",
+      "source": "export_manifest.json",
+      "path": "window.start_hour",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "2026-10-23T14:00:00Z",
+      "rendered": "2026-10-23T14:00:00Z"
+    },
+    {
+      "id": "m.wend",
+      "source": "export_manifest.json",
+      "path": "window.end_hour",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "2026-10-26T13:00:00Z",
+      "rendered": "2026-10-26T13:00:00Z"
+    },
+    {
+      "id": "rb.bins",
+      "source": "api/adjudicate/ribbon.json",
+      "path": "bins",
+      "transform": "len",
+      "fmt": "plain",
+      "note": "",
+      "value": 72,
+      "rendered": "72"
+    },
+    {
+      "id": "r.tier",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-07-20T13Z.json",
+      "path": "adjudicability_tier",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "STRONG",
+      "rendered": "STRONG"
+    },
+    {
+      "id": "r.hour",
+      "source": "api/adjudicate/cell/871fae670ffffff/2026-07-20T13Z.json",
+      "path": "query.window_start",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "2026-07-20T13:00:00Z",
+      "rendered": "2026-07-20T13:00:00Z"
+    },
+    {
+      "id": "c.first_day",
+      "source": "api/adjudicate/coverage.json",
+      "path": "record.first_day",
+      "transform": "raw",
+      "fmt": "plain",
+      "note": "",
+      "value": "2026-07-31",
+      "rendered": "2026-07-31"
+    }
+  ]
+}

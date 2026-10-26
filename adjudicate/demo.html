@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Adjudicating one hour</title>
+<style>
+:root{--bg:#0b0e14;--zone:#11151e;--zone2:#161b26;--line:rgba(148,166,210,.14);
+--text:#e8eaf2;--strong:#fff;--dim:#a9b0c4;--dimmer:#8790a8;--faint:#565d73;
+--accent:#4fd1c5;--good:#3fd68f;--warn:#f5a623;--danger:#ff5c61;
+--mono:ui-monospace,"JetBrains Mono",SFMono-Regular,Menlo,monospace}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);
+font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif}
+.wrap{max-width:860px;margin:0 auto;padding:0 16px 96px}
+header{padding:56px 0 8px}
+h1{font-size:clamp(28px,4.2vw,40px);line-height:1.1;margin:0 0 10px;color:var(--strong);
+letter-spacing:-.01em}
+.lede{font-size:17px;color:#c3c9db;max-width:62ch;margin:0}
+.kicker{font:700 11px var(--mono);letter-spacing:.18em;color:var(--accent);margin:0 0 10px}
+section{border-top:1px solid var(--line);padding:38px 0 6px;margin-top:30px}
+h2{font-size:12px;letter-spacing:.16em;font-weight:700;color:var(--dimmer);
+margin:0 0 18px;text-transform:uppercase}
+.big{font:800 clamp(34px,5vw,52px)/1 var(--mono);color:var(--strong);letter-spacing:-.01em}
+.sub{font:11px var(--mono);color:var(--dimmer);letter-spacing:.08em;margin-top:8px}
+p{max-width:64ch}
+.fact{color:var(--strong);font-weight:600;border-bottom:1px dotted var(--faint);
+cursor:help;font-variant-numeric:tabular-nums}
+/* 2x2 below 760px rather than auto-fit's 3+1, which orphans the fourth
+   tile on its own row at narrow widths. */
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0}
+@media(max-width:760px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:420px){.grid{grid-template-columns:1fr}}
+.tile{background:var(--zone);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+/* CHILD selectors on purpose: `.tile span` also matched the .fact span nested
+   inside <b>, forcing the headline number to display:block at 10px with a
+   full-width rule under it. Seen on the rendered page, not in the markup. */
+.tile > b{display:block;font:800 26px/1 var(--mono);color:var(--strong)}
+.tile > b .fact{font:inherit;color:inherit}
+.tile > span{display:block;font-size:10px;letter-spacing:.14em;color:var(--dimmer);margin-top:7px}
+.rail{border-left:2px solid var(--accent);background:var(--zone);padding:12px 16px;
+border-radius:0 8px 8px 0;margin:16px 0}
+.rail.warn{border-left-color:var(--warn)}
+.rail b{display:block;font:700 10px var(--mono);letter-spacing:.14em;color:var(--accent);margin-bottom:5px}
+.rail.warn b{color:var(--warn)}
+.rail p{margin:0;font-size:13px;color:var(--dim)}
+code,pre{font-family:var(--mono)}
+pre{background:var(--zone2);border:1px solid var(--line);border-radius:8px;
+padding:13px 15px;overflow-x:auto;font-size:12px;color:var(--text);margin:14px 0}
+ul.legs{list-style:none;padding:0;margin:16px 0;display:flex;flex-direction:column;gap:9px}
+ul.legs li{display:flex;gap:12px;align-items:baseline;background:var(--zone);
+border:1px solid var(--line);border-radius:9px;padding:11px 14px}
+ul.legs .st{font:700 10px var(--mono);letter-spacing:.12em;min-width:112px}
+li[data-s="true"] .st{color:var(--good)}
+li[data-s="false"] .st{color:var(--danger)}
+li[data-s="null"] .st{color:var(--dimmer)}
+ul.legs .why{font-size:13px;color:var(--dim)}
+.limits{list-style:none;padding:0;margin:14px 0;display:flex;flex-direction:column;gap:7px}
+.limits li{font-size:13px;color:var(--dim);border-left:2px solid var(--line);padding-left:12px}
+footer{border-top:1px solid var(--line);margin-top:46px;padding-top:18px;
+font-size:11px;color:var(--dimmer);font-family:var(--mono);line-height:1.7}
+a{color:var(--accent)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style></head><body><div class="wrap">
+
+<header>
+  <p class="kicker">PHANTOM &middot; ADJUDICATION</p>
+  <h1>Did aircraft here report degraded GNSS integrity, and can you check it without taking my word for it?</h1>
+  <p class="lede">A feed that settles that question for one hex cell and one UTC
+  hour at a time, from a record committed before the hour began. This page walks
+  one verdict end to end. Every figure is read out of this snapshot's own files;
+  each one names its source file and field in its tooltip, and all of them are
+  listed in the provenance manifest linked at the foot.</p>
+  <div class="rail"><b>WHAT IT IS FOR</b><p>Settling a disputed hour after the
+  fact &mdash; a delay, a diversion, a claim &mdash; with evidence your own
+  customers can re-check independently. It is not a forecast and it does not
+  attribute a cause.</p></div>
+</header>
+
+<section>
+  <h2>1 &middot; The verdict</h2>
+  <div class="big"><span class="fact" data-fact="v.det" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: determination">DEGRADED</span></div>
+  <div class="sub">CELL <span class="fact" data-fact="v.cell" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: query.area">871fae670ffffff</span> &middot; <span class="fact" data-fact="v.start" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: query.window_start">2026-10-10T13:00:00Z</span> &middot; EVIDENCE <span class="fact" data-fact="v.tier" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: adjudicability_tier">STRONG</span></div>
+  <p><span class="fact" data-fact="v.det" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: determination">DEGRADED</span> is a reading of what was observed: the aircraft seen in that cell
+  during that hour reported degraded navigation integrity often enough to cross
+  a fixed threshold. The determination follows the observation and nothing
+  else. The committed record plays a separate part: without a forecast committed in advance for
+  that hour there is no verdict at all, only the refusal shown below. The
+  evidence behind this one is graded <span class="fact" data-fact="v.tier" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: adjudicability_tier">STRONG</span>, which is not a probability and not
+  a confidence score &mdash; it describes how much was observed, nothing more.</p>
+</section>
+
+<section>
+  <h2>2 &middot; The receipt</h2>
+  <p>The forecast covering this hour was committed at <span class="fact" data-fact="v.committed_at" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: proof.committed_at">2026-10-10T11:40:04Z</span> as commit <span class="fact" data-fact="v.sha" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: proof.commit_sha">60cf7d9c44ca0ae41a3b3172ea66f69f445f9af8</span>,
+  which is <b><span class="fact" data-fact="v.lead_min" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: proof.committed_at">79</span> minutes before the hour it describes began</b>. That commit
+  is anchored into Bitcoin block <span class="fact" data-fact="v.block" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: proof.bitcoin_block">970,761</span>. The commit time is git&rsquo;s own
+  stamp, which the author sets; the block is the part you do not have to take
+  on trust.</p>
+  <pre>git clone <span class="fact" data-fact="m.repo" title="export_manifest.json :: mirror.repo_url">https://github.com/saurabhdxt-labs/phantom-record-mirror</span>
+<span class="fact" data-fact="v.verify_cmd" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: proof.verify_command">ots info proofs/mirror/60cf7d9c44ca0ae41a3b3172ea66f69f445f9af8.sha.ots</span></pre>
+  <p>That command names a Bitcoin block. Look the block up on any public
+  explorer and read its timestamp: it is an upper bound on when the commit, and
+  every forecast inside it, already existed, to within Bitcoin&rsquo;s usual
+  timestamp tolerance of up to about two hours. Where that block was mined
+  before the hour began, the forecast provably was not written in hindsight.
+  Not every receipt in this snapshot clears that bar: for some hours the block
+  landed after the hour had started, and the console shows the block on every
+  verdict so you can check each one rather than take an average. What the
+  ordering does not show is that the observations behind a determination are
+  unaltered &mdash; those are not anchored, and this page does not claim they
+  are.</p>
+  <div class="rail warn"><b>WHAT THIS CHECK DOES NOT DO</b>
+  <p><span class="fact" data-fact="c.attest_method" title="api/adjudicate/coverage.json :: proofs.attestation_method">Bitcoin attestation record present in the proof file; structural reading only, not verified against a Bitcoin node</span>. A full <code>ots verify</code> against a Bitcoin
+  node confirms the proof cryptographically; this snapshot reports only what
+  the proof file asserts.</p></div>
+</section>
+
+<section>
+  <h2>3 &middot; What was excluded, and what was not</h2>
+  <p>Three alternative explanations. A leg that was not assessed is reported as
+  not assessed &mdash; it is never counted as satisfied, and an excluded leg
+  rules an explanation out rather than ruling a cause in.</p>
+  <ul class="legs"><li data-s="true"><span class="st">EXCLUDED</span><span class="why"><b>Whether enough distinct aircraft were observed in the cell</b> &mdash; the floor for ruling out a single faulty receiver</span></li><li data-s="null"><span class="st">NOT ASSESSED</span><span class="why"><b>Whether space weather was quiet</b> &mdash; which would rule out a geomagnetic storm as an available explanation</span></li><li data-s="false"><span class="st">NOT ESTABLISHED</span><span class="why"><b>Whether degradation began inside this window</b> &mdash; rather than already running when the window opened</span></li></ul>
+  <p>The verdict ships with its own limits:</p>
+  <ul class="limits"><li><span class="fact" data-fact="v.limit0" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: limits.0">Coverage limit: the adjudicability tier is STRONG; the observation count behind it is not disclosed.</span></li><li><span class="fact" data-fact="v.limit1" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: limits.1">no evidence is not the same as no event: this verdict reports only what the anchored record contains.</span></li><li><span class="fact" data-fact="v.limit2" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: limits.2">This is an evidence assembly from a pre-committed, anchored record; it makes no forecast.</span></li><li><span class="fact" data-fact="v.limit3" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: limits.3">Geomagnetic context unavailable for this window; this alternative explanation was not assessed.</span></li><li><span class="fact" data-fact="v.limit4" title="api/adjudicate/cell/871fae670ffffff/2026-10-10T13Z.json :: limits.4">Space weather was not assessed for this window, so it is not excluded as an explanation; this is not counted as satisfied.</span></li></ul>
+</section>
+
+<section>
+  <h2>4 &middot; A refusal</h2>
+  <p>The same cell at <span class="fact" data-fact="r.hour" title="api/adjudicate/cell/871fae670ffffff/2026-07-20T13Z.json :: query.window_start">2026-07-20T13:00:00Z</span>, which is before this record begins on
+  <span class="fact" data-fact="c.first_day" title="api/adjudicate/coverage.json :: record.first_day">2026-07-31</span>. The observation is graded <span class="fact" data-fact="r.tier" title="api/adjudicate/cell/871fae670ffffff/2026-07-20T13Z.json :: adjudicability_tier">STRONG</span> &mdash; the strongest tier
+  &mdash; and the system still refuses, at the <code><span class="fact" data-fact="r.stage" title="api/adjudicate/cell/871fae670ffffff/2026-07-20T13Z.json :: refusal.stage">record</span></code>
+  stage:</p>
+  <div class="rail warn"><b>DECLINED</b><p><span class="fact" data-fact="r.detail" title="api/adjudicate/cell/871fae670ffffff/2026-07-20T13Z.json :: refusal.detail">no committed forecast row covers this area and hour</span></p></div>
+  <p>Strong evidence is not enough on its own. With nothing committed in advance
+  for that hour there is nothing to adjudicate against, and the answer is a
+  refusal rather than a late opinion. A system that declines is one you can
+  believe when it does not.</p>
+</section>
+
+<section>
+  <h2>5 &middot; The shape of what we know</h2>
+  <div class="grid">
+    <div class="tile"><b><span class="fact" data-fact="c.record_days" title="api/adjudicate/coverage.json :: record.n_days">88</span></b><span>CONSECUTIVE DAYS OF RECORD</span></div>
+    <div class="tile"><b><span class="fact" data-fact="c.attested" title="api/adjudicate/coverage.json :: proofs.attested">1,919</span></b><span>PROOF FILES WITH A BITCOIN ATTESTATION RECORD</span></div>
+    <div class="tile"><b><span class="fact" data-fact="c.onset_days" title="api/adjudicate/coverage.json :: onset.n_days">63</span></b><span>ONSET-CAPABLE DAYS, SEPARATE WINDOW</span></div>
+    <div class="tile"><b><span class="fact" data-fact="x.unknown_pct" title="export_manifest.json :: totals.determination_by_geomagnetic">82%</span></b><span>SPACE WEATHER UNASSESSED</span></div>
+  </div>
+  <p>The record runs <span class="fact" data-fact="c.record_days" title="api/adjudicate/coverage.json :: record.n_days">88</span> consecutive calendar days with <span class="fact" data-fact="c.record_gaps" title="api/adjudicate/coverage.json :: record.gaps">0</span> calendar-day gaps. That is a day-level count: a day enters the record once it holds a committed forecast, so it is not a claim about every hour inside those days. Its first two days were added a day late, after their hours had passed; live, hour-by-hour commitment begins on the third. Measured by the hour instead, <span class="fact" data-fact="c.hours_present" title="api/adjudicate/coverage.json :: record.hours.present">2,076</span> of <span class="fact" data-fact="c.hours_expected" title="api/adjudicate/coverage.json :: record.hours.expected">2,100</span> owed hours are present and <span class="fact" data-fact="c.hours_missing" title="api/adjudicate/coverage.json :: record.hours.missing">24</span> are absent, spread over <span class="fact" data-fact="c.hours_days_missing" title="api/adjudicate/coverage.json :: record.hours.days_with_missing">11</span> days &mdash; an hour is counted absent only once it has closed and had a two-hour settling grace. The console shows those hours as missing rather than averaging them away. Any cell with a committed row can be queried; the console lists, and this snapshot exports, only the cells the forecast flagged. The onset signal is
+  thinner and separate: <span class="fact" data-fact="c.onset_days" title="api/adjudicate/coverage.json :: onset.n_days">63</span> capable days with <span class="fact" data-fact="c.onset_gaps" title="api/adjudicate/coverage.json :: onset.gaps">4</span> named gaps, so for
+  many hours the question &ldquo;did it start here?&rdquo; cannot be answered at
+  all. There are <span class="fact" data-fact="c.per_commit" title="api/adjudicate/coverage.json :: proofs.per_commit">1,782</span> per-commit proof files and <span class="fact" data-fact="c.daily_head" title="api/adjudicate/coverage.json :: proofs.daily_head">140</span> daily-head
+  ones; of that total, <span class="fact" data-fact="c.attested" title="api/adjudicate/coverage.json :: proofs.attested">1,919</span> already carry a Bitcoin attestation and <span class="fact" data-fact="c.pending" title="api/adjudicate/coverage.json :: proofs.pending">3</span> are
+  still waiting on a block.</p>
+  <p>Space weather could not be assessed for <span class="fact" data-fact="x.unknown_nonrefused" title="export_manifest.json :: totals.determination_by_geomagnetic">2,828</span> of the <span class="fact" data-fact="x.nonrefused" title="export_manifest.json :: totals.determination_by_geomagnetic">3,428</span> verdicts
+  that were not refused (<span class="fact" data-fact="x.unknown_pct" title="export_manifest.json :: totals.determination_by_geomagnetic">82%</span>). That is a limit of this snapshot, not a
+  finding about space weather, and those cells are not painted quiet.</p>
+  <div class="rail warn"><b>READ THE DENOMINATOR BEFORE THE PERCENTAGES</b>
+  <p>This snapshot is a deliberately selected sample, not a census. The export
+  is configured to take, from each of the <span class="fact" data-fact="m.hours" title="export_manifest.json :: totals.hour_files">70</span> hours, up to <span class="fact" data-fact="m.top_cells" title="export_manifest.json :: selection.top_cells_per_hour">60</span> cells
+  ranked by evidence plus <span class="fact" data-fact="m.unknown_cells" title="export_manifest.json :: selection.unknown_cells_per_hour">3</span> unobserved ones; in sparse hours that top slice
+  is itself partly unobserved. That gives <span class="fact" data-fact="m.verdicts_in_window" title="export_manifest.json :: cells_per_hour">4,410</span> verdicts, drawn from
+  the <span class="fact" data-fact="m.cells_in_window" title="export_manifest.json :: cells_per_hour">49,339</span> cell-hours the forecast flagged at or above its probability
+  threshold in this window &mdash; not from every cell-hour in it, which is a
+  far larger number. The <span class="fact" data-fact="m.pinned" title="export_manifest.json :: pinned">2</span> pinned examples bring the total to
+  <span class="fact" data-fact="m.verdicts" title="export_manifest.json :: totals.verdicts">4,412</span>, of which
+  <span class="fact" data-fact="m.refused" title="export_manifest.json :: totals.determinations.REFUSED">984</span> are refusals. Because the sample is ranked by evidence, none of
+  these proportions is the system's rate over all cells and none should be read
+  as one.</p></div>
+  <div class="rail"><b>WINDOW</b><p><span class="fact" data-fact="m.wstart" title="export_manifest.json :: window.start_hour">2026-10-23T14:00:00Z</span> to <span class="fact" data-fact="m.wend" title="export_manifest.json :: window.end_hour">2026-10-26T13:00:00Z</span> &mdash; <span class="fact" data-fact="m.hours" title="export_manifest.json :: totals.hour_files">70</span> hourly
+  files, <span class="fact" data-fact="rb.bins" title="api/adjudicate/ribbon.json :: bins">72</span> hours on the ribbon.</p></div>
+</section>
+
+<section>
+  <h2>6 &middot; Check it yourself</h2>
+  <p>The console linked below answers the same question for any cell and any
+  hour in the window, and every panel shows the API call that produced it.</p>
+  <pre>curl -s './api/adjudicate/coverage.json'
+curl -s './api/adjudicate/ribbon.json'
+curl -s './api/adjudicate/cell/&lt;cell-id&gt;/&lt;hour&gt;.json'</pre>
+  <p><a href="./index.html">Open the console &rarr;</a></p>
+</section>
+
+<footer>
+  Every figure on this page is generated from this snapshot and recorded in
+  <a href="./demo_provenance.json">demo_provenance.json</a> with its source file, field and
+  derivation. None was typed by hand, and a test fails if any number here cannot
+  be reproduced from the data.
+</footer>
+</div></body></html>

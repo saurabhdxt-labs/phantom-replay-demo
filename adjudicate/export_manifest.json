@@ -1,0 +1,501 @@
+{
+  "cells_per_hour": {
+    "2026-10-23T14:00:00Z": {
+      "cells_in_hour": 946,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T15:00:00Z": {
+      "cells_in_hour": 873,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T16:00:00Z": {
+      "cells_in_hour": 859,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T17:00:00Z": {
+      "cells_in_hour": 618,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T18:00:00Z": {
+      "cells_in_hour": 749,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T19:00:00Z": {
+      "cells_in_hour": 490,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T20:00:00Z": {
+      "cells_in_hour": 619,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T21:00:00Z": {
+      "cells_in_hour": 993,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T22:00:00Z": {
+      "cells_in_hour": 1236,
+      "verdicts_exported": 63
+    },
+    "2026-10-23T23:00:00Z": {
+      "cells_in_hour": 960,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T00:00:00Z": {
+      "cells_in_hour": 720,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T01:00:00Z": {
+      "cells_in_hour": 714,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T02:00:00Z": {
+      "cells_in_hour": 539,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T03:00:00Z": {
+      "cells_in_hour": 478,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T04:00:00Z": {
+      "cells_in_hour": 786,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T05:00:00Z": {
+      "cells_in_hour": 638,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T06:00:00Z": {
+      "cells_in_hour": 262,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T07:00:00Z": {
+      "cells_in_hour": 405,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T08:00:00Z": {
+      "cells_in_hour": 556,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T09:00:00Z": {
+      "cells_in_hour": 674,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T10:00:00Z": {
+      "cells_in_hour": 999,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T11:00:00Z": {
+      "cells_in_hour": 1277,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T12:00:00Z": {
+      "cells_in_hour": 1444,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T13:00:00Z": {
+      "cells_in_hour": 1249,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T14:00:00Z": {
+      "cells_in_hour": 1096,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T15:00:00Z": {
+      "cells_in_hour": 1325,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T16:00:00Z": {
+      "cells_in_hour": 1340,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T17:00:00Z": {
+      "cells_in_hour": 767,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T18:00:00Z": {
+      "cells_in_hour": 397,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T19:00:00Z": {
+      "cells_in_hour": 474,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T20:00:00Z": {
+      "cells_in_hour": 816,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T21:00:00Z": {
+      "cells_in_hour": 1231,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T22:00:00Z": {
+      "cells_in_hour": 1192,
+      "verdicts_exported": 63
+    },
+    "2026-10-24T23:00:00Z": {
+      "cells_in_hour": 909,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T00:00:00Z": {
+      "cells_in_hour": 834,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T01:00:00Z": {
+      "cells_in_hour": 755,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T02:00:00Z": {
+      "cells_in_hour": 561,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T03:00:00Z": {
+      "cells_in_hour": 652,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T04:00:00Z": {
+      "cells_in_hour": 741,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T05:00:00Z": {
+      "cells_in_hour": 513,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T06:00:00Z": {
+      "cells_in_hour": 311,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T07:00:00Z": {
+      "cells_in_hour": 300,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T08:00:00Z": {
+      "cells_in_hour": 373,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T09:00:00Z": {
+      "cells_in_hour": 517,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T10:00:00Z": {
+      "cells_in_hour": 835,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T11:00:00Z": {
+      "cells_in_hour": 809,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T12:00:00Z": {
+      "cells_in_hour": 847,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T13:00:00Z": {
+      "cells_in_hour": 749,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T14:00:00Z": {
+      "cells_in_hour": 838,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T15:00:00Z": {
+      "cells_in_hour": 773,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T16:00:00Z": {
+      "cells_in_hour": 703,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T17:00:00Z": {
+      "cells_in_hour": 551,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T18:00:00Z": {
+      "cells_in_hour": 500,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T19:00:00Z": {
+      "cells_in_hour": 478,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T20:00:00Z": {
+      "cells_in_hour": 600,
+      "verdicts_exported": 63
+    },
+    "2026-10-25T22:00:00Z": {
+      "cells_in_hour": 357,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T00:00:00Z": {
+      "cells_in_hour": 247,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T01:00:00Z": {
+      "cells_in_hour": 383,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T02:00:00Z": {
+      "cells_in_hour": 436,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T03:00:00Z": {
+      "cells_in_hour": 335,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T04:00:00Z": {
+      "cells_in_hour": 522,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T05:00:00Z": {
+      "cells_in_hour": 544,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T06:00:00Z": {
+      "cells_in_hour": 218,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T07:00:00Z": {
+      "cells_in_hour": 320,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T08:00:00Z": {
+      "cells_in_hour": 192,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T09:00:00Z": {
+      "cells_in_hour": 465,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T10:00:00Z": {
+      "cells_in_hour": 588,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T11:00:00Z": {
+      "cells_in_hour": 725,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T12:00:00Z": {
+      "cells_in_hour": 1031,
+      "verdicts_exported": 63
+    },
+    "2026-10-26T13:00:00Z": {
+      "cells_in_hour": 1105,
+      "verdicts_exported": 63
+    }
+  },
+  "console": {
+    "latest_finder_consistent": true
+  },
+  "contract_versions": {
+    "hour_and_coverage": "1.1",
+    "ribbon": "1.2",
+    "verdict": "1.0"
+  },
+  "coverage_at_export": {
+    "contract_version": "1.1",
+    "generated_at": "2026-10-26T14:11:41Z",
+    "onset": {
+      "first_day": "2026-07-02",
+      "gaps": [
+        {
+          "days": 27,
+          "from": "2026-07-05",
+          "to": "2026-07-31"
+        },
+        {
+          "days": 4,
+          "from": "2026-08-13",
+          "to": "2026-08-16"
+        },
+        {
+          "days": 4,
+          "from": "2026-08-23",
+          "to": "2026-08-26"
+        },
+        {
+          "days": 18,
+          "from": "2026-09-04",
+          "to": "2026-09-21"
+        }
+      ],
+      "last_day": "2026-10-25",
+      "n_days": 63
+    },
+    "proofs": {
+      "attestation_method": "Bitcoin attestation record present in the proof file; structural reading only, not verified against a Bitcoin node",
+      "attested": 1919,
+      "attested_unavailable_reason": null,
+      "daily_head": 140,
+      "pending": 3,
+      "per_commit": 1782
+    },
+    "record": {
+      "first_day": "2026-07-31",
+      "gaps": [],
+      "hours": {
+        "days_with_missing": 11,
+        "expected": 2100,
+        "missing": 24,
+        "present": 2076
+      },
+      "last_day": "2026-10-26",
+      "n_days": 88
+    }
+  },
+  "export_format": 1,
+  "exported_at": "2026-10-26T14:11:41Z",
+  "generation": {
+    "peak_rss_mb": 430.8,
+    "resumed": false,
+    "wall_seconds": 1557.0
+  },
+  "hours": {
+    "exported": [
+      "2026-10-23T14:00:00Z",
+      "2026-10-23T15:00:00Z",
+      "2026-10-23T16:00:00Z",
+      "2026-10-23T17:00:00Z",
+      "2026-10-23T18:00:00Z",
+      "2026-10-23T19:00:00Z",
+      "2026-10-23T20:00:00Z",
+      "2026-10-23T21:00:00Z",
+      "2026-10-23T22:00:00Z",
+      "2026-10-23T23:00:00Z",
+      "2026-10-24T00:00:00Z",
+      "2026-10-24T01:00:00Z",
+      "2026-10-24T02:00:00Z",
+      "2026-10-24T03:00:00Z",
+      "2026-10-24T04:00:00Z",
+      "2026-10-24T05:00:00Z",
+      "2026-10-24T06:00:00Z",
+      "2026-10-24T07:00:00Z",
+      "2026-10-24T08:00:00Z",
+      "2026-10-24T09:00:00Z",
+      "2026-10-24T10:00:00Z",
+      "2026-10-24T11:00:00Z",
+      "2026-10-24T12:00:00Z",
+      "2026-10-24T13:00:00Z",
+      "2026-10-24T14:00:00Z",
+      "2026-10-24T15:00:00Z",
+      "2026-10-24T16:00:00Z",
+      "2026-10-24T17:00:00Z",
+      "2026-10-24T18:00:00Z",
+      "2026-10-24T19:00:00Z",
+      "2026-10-24T20:00:00Z",
+      "2026-10-24T21:00:00Z",
+      "2026-10-24T22:00:00Z",
+      "2026-10-24T23:00:00Z",
+      "2026-10-25T00:00:00Z",
+      "2026-10-25T01:00:00Z",
+      "2026-10-25T02:00:00Z",
+      "2026-10-25T03:00:00Z",
+      "2026-10-25T04:00:00Z",
+      "2026-10-25T05:00:00Z",
+      "2026-10-25T06:00:00Z",
+      "2026-10-25T07:00:00Z",
+      "2026-10-25T08:00:00Z",
+      "2026-10-25T09:00:00Z",
+      "2026-10-25T10:00:00Z",
+      "2026-10-25T11:00:00Z",
+      "2026-10-25T12:00:00Z",
+      "2026-10-25T13:00:00Z",
+      "2026-10-25T14:00:00Z",
+      "2026-10-25T15:00:00Z",
+      "2026-10-25T16:00:00Z",
+      "2026-10-25T17:00:00Z",
+      "2026-10-25T18:00:00Z",
+      "2026-10-25T19:00:00Z",
+      "2026-10-25T20:00:00Z",
+      "2026-10-25T22:00:00Z",
+      "2026-10-26T00:00:00Z",
+      "2026-10-26T01:00:00Z",
+      "2026-10-26T02:00:00Z",
+      "2026-10-26T03:00:00Z",
+      "2026-10-26T04:00:00Z",
+      "2026-10-26T05:00:00Z",
+      "2026-10-26T06:00:00Z",
+      "2026-10-26T07:00:00Z",
+      "2026-10-26T08:00:00Z",
+      "2026-10-26T09:00:00Z",
+      "2026-10-26T10:00:00Z",
+      "2026-10-26T11:00:00Z",
+      "2026-10-26T12:00:00Z",
+      "2026-10-26T13:00:00Z"
+    ],
+    "incomplete_at_export": [],
+    "n_exported": 70,
+    "n_skipped": 2,
+    "skipped": [
+      {
+        "hour": "2026-10-25T21:00:00Z",
+        "reason": "gap_in_record"
+      },
+      {
+        "hour": "2026-10-25T23:00:00Z",
+        "reason": "gap_in_record"
+      }
+    ]
+  },
+  "kind": "frozen_static_snapshot",
+  "landing_hour": "2026-10-26T13:00:00Z",
+  "mirror": {
+    "head_commit": "adcbed7c9d368d609f14ea75bca808d923a85772",
+    "head_commit_at_finish": "adcbed7c9d368d609f14ea75bca808d923a85772",
+    "repo_url": "https://github.com/saurabhdxt-labs/phantom-record-mirror"
+  },
+  "not_live_data": true,
+  "pinned": [
+    {
+      "cell": "871fae670ffffff",
+      "hour": "2026-10-10T13:00:00Z",
+      "hour_out_of_record": false
+    },
+    {
+      "cell": "871fae670ffffff",
+      "hour": "2026-07-20T13:00:00Z",
+      "hour_out_of_record": true
+    }
+  ],
+  "ribbon": {
+    "bins_marked_not_in_export": [],
+    "contract_version": "1.2",
+    "end": "2026-10-26T13:00:00Z",
+    "file": "api/adjudicate/ribbon.json",
+    "hours": 72,
+    "start": "2026-10-23T14:00:00Z"
+  },
+  "selection": {
+    "horizon": 3,
+    "min_probability": 0.7,
+    "ordering": "highest adjudicability tier, then committed probability, then cell id; unobserved cells (tier null) after the top cells, highest probability first",
+    "top_cells_per_hour": 60,
+    "unknown_cells_per_hour": 3
+  },
+  "totals": {
+    "determination_by_geomagnetic": {
+      "CLEAR|QUIET": 69,
+      "CLEAR|UNKNOWN": 568,
+      "DEGRADED|QUIET": 531,
+      "DEGRADED|UNKNOWN": 2260,
+      "REFUSED|NONE": 338,
+      "REFUSED|QUIET": 120,
+      "REFUSED|UNKNOWN": 526
+    },
+    "determinations": {
+      "CLEAR": 637,
+      "DEGRADED": 2791,
+      "REFUSED": 984
+    },
+    "geomagnetic_status": {
+      "NONE": 338,
+      "QUIET": 720,
+      "UNKNOWN": 3354
+    },
+    "hour_files": 70,
+    "verdicts": 4412
+  },
+  "window": {
+    "end_hour": "2026-10-26T13:00:00Z",
+    "end_hour_source": "latest_in_record",
+    "requested_hours": 72,
+    "start_hour": "2026-10-23T14:00:00Z"
+  }
+}
